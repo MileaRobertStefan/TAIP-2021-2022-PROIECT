@@ -6,6 +6,12 @@ class Obfuscator:
         self.next_obfuscator = next_obfuscator
 
     def obfuscate(self, coordinates, image, key_builder):
-        pass
+
+        # TODO obfuscate
+        
+        if self.next_obfuscator is not None:
+            self.next_obfuscator.obfuscate(coordinates, image,key_builder)
+
+
 
 

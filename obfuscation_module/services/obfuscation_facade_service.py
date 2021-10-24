@@ -10,3 +10,7 @@ class ObfuscationService:
             image = self.obfuscation_context.obfuscate(obfuscation_area, image, self.key_builder)
         return image, self.key_builder.build()
 
+    def deobfuscate(self,key,imagine):
+        pass
+
+# proxy ! validari pentru service!
