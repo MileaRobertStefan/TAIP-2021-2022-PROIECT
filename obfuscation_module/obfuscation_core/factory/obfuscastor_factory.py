@@ -18,7 +18,7 @@ class ObfuscationFactory:
             current_ob.next_obfuscator = ob
             current_ob = ob
            
-        return current_ob
+        return obfuscators[0]
     pass
 
 
