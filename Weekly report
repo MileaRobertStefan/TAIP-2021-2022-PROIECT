@@ -1,0 +1,14 @@
+Lab 2:
+Roxana Irimia - contributed to the State Of Art and Risk Assessment documents and created Trello Board
+Elena Bucataru  - contributed to the State of the Art document
+Milea Robert - contributed to the State of the Art document , created git repo, wrote README
+Silviu Ilas - contributed to the State of the Art document
+Ana Vasiliu - contributed to the State of the Art document
+
+Lab 4:
+Roxana Irimia - implemented chain of responsability for obfuscation, controller facade, key builder and the general layout of the project
+Elena Bucataru  - implemented Façade, Builder, Strategy, Singleton  for face detection module
+Milea Robert - implemented factory, command, chain of responsability for deobfuscation for obfuscation core
+Silviu Ilas - implemented proxy, factory, chain of responsability for deobfuscation for obfuscation core
+Ana Vasiliu - implemented Façade, Builder, Strategy, Singleton  for face detection module
+
