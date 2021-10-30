@@ -6,11 +6,19 @@ from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 
 
 class ScrambleDeObfuscator(DeObfuscator):
-    scramble_percent = 10
+    seed = None
+    scramble_percent = None
+
+    def parse_key_data(self) -> None:
+        self.seed, self.scramble_percent = self.key_data.split("||")
+        self.seed = int(self.seed)
+        self.scramble_percent = int(self.scramble_percent)
 
     def deobfuscate(self, image):
+        if self.seed is None or self.scramble_percent is None:
+            self.parse_key_data()
         print("Descramble")
-        random.seed(self.key_data)
+        random.seed(self.seed)
         y_size = len(image)
         x_size = len(image[0])
         nr_pixels = (self.scramble_percent * image.size) // 100

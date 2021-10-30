@@ -12,13 +12,13 @@ class ScrambleObfuscator(Obfuscator):
     #     ((x1, y1), (x2, y2)) = coordinates
     #     return image[y1:y2, x1:x2]
 
-    scramble_percent = 10
+    scramble_percent = 100
 
     def obfuscate(self, image, key_builder: KeyBuilder):
         print("Scrambling")
         random.seed(datetime.now())
         key_data = int(random.random() * 1000000000)
-        layer = Layer(50, key_data)
+        layer = Layer(50, str(key_data)+"||"+str(self.scramble_percent))
         key_builder.set_step(layer)
 
         random.seed(key_data)

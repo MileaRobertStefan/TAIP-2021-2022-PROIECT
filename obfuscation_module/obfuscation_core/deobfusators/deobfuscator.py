@@ -7,7 +7,7 @@ class DeObfuscator:
     def set_next_deobfuscator(self, next_deobfuscator):
         self.next_deobfuscator = next_deobfuscator
 
-    def parse_key_data(key_data : str) -> None:
+    def parse_key_data(self) -> None:
         pass
 
     def deobfuscate(self, image):
