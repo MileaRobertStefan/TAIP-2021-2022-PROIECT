@@ -1,6 +1,6 @@
 from typing import List
 from key.key_types.zone_key import ZoneKey
-from obfuscation_core.deobfusators.deobfuscator import Deobfuscator
+from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 
 class DeobfuscationFactory:
 
@@ -8,7 +8,7 @@ class DeobfuscationFactory:
         pass
 
 
-    def create_deobfuscation(zone_key : ZoneKey) -> Deobfuscator:
+    def create_deobfuscation(zone_key : ZoneKey) -> DeObfuscator:
         pass
 
     pass

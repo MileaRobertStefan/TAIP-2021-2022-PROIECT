@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 
-from key.layer import Layer
+from key.key_types.layer import Layer
 
 
 class ZoneKey:

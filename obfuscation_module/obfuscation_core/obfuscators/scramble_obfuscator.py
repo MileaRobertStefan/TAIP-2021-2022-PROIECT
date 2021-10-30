@@ -1,0 +1,40 @@
+from key.key_builder import KeyBuilder
+from key.key_types.layer import Layer
+from obfuscation_core.obfuscators.obfuscator import Obfuscator
+import random
+from random import randrange
+from datetime import datetime
+import cv2
+
+
+class ScrambleObfuscator(Obfuscator):
+    # def get_image(self, coordinates, image):
+    #     ((x1, y1), (x2, y2)) = coordinates
+    #     return image[y1:y2, x1:x2]
+
+    scramble_percent = 10
+
+    def obfuscate(self, image, key_builder: KeyBuilder):
+        print("Scrambling")
+        random.seed(datetime.now())
+        key_data = int(random.random() * 1000000000)
+        layer = Layer(50, key_data)
+        random.seed(key_data)
+        key_builder.set_step(layer)
+
+        # image = self.get_image(coordinates, image)
+        y_size = len(image)
+        x_size = len(image[0])
+        nr_pixels = (self.scramble_percent * image.size) // 100
+        for i in range(nr_pixels):
+            start_x = random.randrange(1000000) % x_size
+            start_y = random.randrange(1000000) % y_size
+            end_x = random.randrange(1000000) % x_size
+            end_y = random.randrange(1000000) % y_size
+
+            aux = image[start_y][start_x]
+            image[start_y][start_x] = image[end_y][end_x]
+            image[end_y][end_x] = aux
+
+        if self.next_obfuscator is not None:
+            self.next_obfuscator.obfuscate(image, key_builder)

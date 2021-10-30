@@ -1,4 +1,4 @@
-class Deobfuscator:
+class DeObfuscator:
     next_deobfuscator = None
     key_data = ""
     def __init__(self, key_data):

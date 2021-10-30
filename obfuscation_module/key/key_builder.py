@@ -14,6 +14,7 @@ class KeyBuilder:
         self.steps = []
 
     def set_step(self, layer: Layer) -> None:
+        self.key.layers.append(layer)
         self.steps.append(layer)
 
 
