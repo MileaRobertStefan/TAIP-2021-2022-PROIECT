@@ -1,5 +1,8 @@
 import copy
 import pickle as pk
+import zlib
+
+
 from typing import List,Tuple
 
 from obfuscation_module.key.key_types.zone_key import ZoneKey
@@ -17,9 +20,9 @@ class MasterKey:
         pass
 
     def to_string(self):
-        pickled = codecs.encode(pk.dumps(self), "base64").decode()
-
-
+        pickled = pk.dumps(self)
+        pickled = zlib.compress(pickled)
+        pickled = codecs.encode(pickled, "base64").decode()
         return pickled
 
 

@@ -1,5 +1,5 @@
-key_test = False
-obfuscation_test = True
+key_test = True
+obfuscation_test = False
 
 if key_test:
     from tests.key_test.test_key_type import *
