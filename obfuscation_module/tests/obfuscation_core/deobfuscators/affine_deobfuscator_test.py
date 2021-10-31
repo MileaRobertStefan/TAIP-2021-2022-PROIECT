@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from obfuscation_core.deobfusators.affine_deobfuscator import AffineDeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.affine_deobfuscator import AffineDeObfuscator
 
 
 class TestAffineDeobfuscator(unittest.TestCase):

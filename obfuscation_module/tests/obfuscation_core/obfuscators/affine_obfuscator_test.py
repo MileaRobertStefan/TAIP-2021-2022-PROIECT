@@ -4,9 +4,9 @@ import numpy as np
 from freezegun import freeze_time
 from mockito import when, ANY, spy, verify
 
-from key.key_builder import KeyBuilder
-from key.key_types.layer import Layer
-from obfuscation_core.obfuscators.affine_obfuscator import AffineObfuscator
+from obfuscation_module.key.key_builder import KeyBuilder
+from obfuscation_module.key.key_types.layer import Layer
+from obfuscation_module.obfuscation_core.obfuscators.affine_obfuscator import AffineObfuscator
 
 
 class TestAffineObfuscator(unittest.TestCase):
