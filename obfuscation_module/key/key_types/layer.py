@@ -7,4 +7,5 @@ class Layer:
         self.key_data = key_data
         pass
 
-    pass
+    def __eq__(self, other):
+        return self.alg_id == other.alg_id and self.key_data == other.key_data

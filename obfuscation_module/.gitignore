@@ -1,2 +1,4 @@
 venv
 **/**/__init__.py
+.idea
+**/**/__pycache__
