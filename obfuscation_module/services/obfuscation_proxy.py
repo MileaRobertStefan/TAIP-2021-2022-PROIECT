@@ -1,5 +1,6 @@
 from services.obfuscation_facade_service import ObfuscationService
 
+
 class ObfuscationProxy:
     def validate(self, request) -> bool:
         pass
@@ -18,4 +19,3 @@ class ObfuscationProxy:
             to_ret = obfuscation_service.obfuscate(areas, images)
             self.post_process(to_ret)
             return to_ret
-            

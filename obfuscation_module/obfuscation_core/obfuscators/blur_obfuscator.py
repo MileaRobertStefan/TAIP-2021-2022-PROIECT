@@ -1,11 +1,14 @@
 import random
 
+from numpy import ndarray
+
+from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
 class BlurObfuscator(Obfuscator):
-    def obfuscate(self, image, key_builder):
+    def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         layer = Layer(1, "key_data for blur")
         random.seed("key_data")
         key_builder.set_step(layer)

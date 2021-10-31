@@ -1,5 +1,6 @@
+from typing import List
+
 from key.key_types.layer import Layer
-from typing import List, Tuple
 from key.key_types.zone_key import ZoneKey
 
 
@@ -16,7 +17,6 @@ class KeyBuilder:
     def set_step(self, layer: Layer) -> None:
         self.key.layers.append(layer)
         self.steps.append(layer)
-
 
     def build(self) -> ZoneKey:
         # compile

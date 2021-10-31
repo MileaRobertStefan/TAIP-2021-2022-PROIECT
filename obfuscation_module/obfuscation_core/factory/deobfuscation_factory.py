@@ -1,4 +1,3 @@
-from typing import List
 from key.key_types.zone_key import ZoneKey
 from obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
 from obfuscation_core.deobfusators.deobfuscator import DeObfuscator

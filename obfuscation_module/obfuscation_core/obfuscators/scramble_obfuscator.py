@@ -1,10 +1,11 @@
+import random
+from datetime import datetime
+
+from numpy import ndarray
+
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
-import random
-from random import randrange
-from datetime import datetime
-import cv2
 
 
 class ScrambleObfuscator(Obfuscator):
@@ -14,11 +15,11 @@ class ScrambleObfuscator(Obfuscator):
 
     scramble_percent = 100
 
-    def obfuscate(self, image, key_builder: KeyBuilder):
+    def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Scrambling")
         random.seed(datetime.now())
-        key_data = int(random.random() * 1000000000)
-        layer = Layer(50, str(key_data)+"||"+str(self.scramble_percent))
+        key_data = int(random.random() * 100000000000)
+        layer = Layer(50, str(key_data) + "||" + str(self.scramble_percent))
         key_builder.set_step(layer)
 
         random.seed(key_data)

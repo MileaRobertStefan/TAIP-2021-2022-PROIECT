@@ -1,3 +1,6 @@
+from numpy import ndarray
+
+from key.key_builder import KeyBuilder
 from obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
 from obfuscation_core.obfuscators.encryption_obfuscator import EncryptionObfuscator
 from obfuscation_core.obfuscators.scramble_obfuscator import ScrambleObfuscator
@@ -7,20 +10,16 @@ class ObfuscationContext:
     def __init__(self):
         self.obfuscator = self.init_obfuscators()
 
-    def obfuscate(self, image, key_builder):
+    def obfuscate(self, image: ndarray, key_builder : KeyBuilder):
         self.obfuscator.obfuscate(image, key_builder)
 
     @staticmethod
     def init_obfuscators():
-        encryption1 = EncryptionObfuscator()
         blur = BlurObfuscator()
-        encryption2 = EncryptionObfuscator()
         scramble = ScrambleObfuscator()
-        encryption1.set_next_obfuscator(blur)
-        blur.set_next_obfuscator(encryption2)
-        encryption2.next_obfuscator = scramble
-        return encryption1
-
-
-
-   
+        encryption1 = EncryptionObfuscator()
+        encryption2 = EncryptionObfuscator()
+        blur.set_next_obfuscator(scramble)
+        scramble.set_next_obfuscator(encryption1)
+        encryption1.set_next_obfuscator(encryption2)
+        return blur

@@ -1,6 +1,6 @@
 import random
 
-import cv2
+from numpy import ndarray
 
 from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 
@@ -14,7 +14,7 @@ class ScrambleDeObfuscator(DeObfuscator):
         self.seed = int(self.seed)
         self.scramble_percent = int(self.scramble_percent)
 
-    def deobfuscate(self, image):
+    def deobfuscate(self, image: ndarray):
         if self.seed is None or self.scramble_percent is None:
             self.parse_key_data()
         print("Descramble")

@@ -1,3 +1,8 @@
+from numpy import ndarray
+
+from key.key_builder import KeyBuilder
+
+
 class Obfuscator:
     def __init__(self):
         self.next_obfuscator = None
@@ -5,7 +10,7 @@ class Obfuscator:
     def set_next_obfuscator(self, next_obfuscator):
         self.next_obfuscator = next_obfuscator
 
-    def obfuscate(self, image, key_builder):
+    def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         # TODO obfuscate
 
         if self.next_obfuscator is not None:

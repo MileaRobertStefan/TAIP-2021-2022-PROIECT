@@ -1,6 +1,10 @@
+from numpy import ndarray
+
+
 class DeObfuscator:
     next_deobfuscator = None
     key_data = None
+
     def __init__(self):
         pass
 
@@ -10,7 +14,5 @@ class DeObfuscator:
     def parse_key_data(self) -> None:
         pass
 
-    def deobfuscate(self, image):
+    def deobfuscate(self, image: ndarray):
         pass
-
-
