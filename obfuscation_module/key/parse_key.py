@@ -1,4 +1,4 @@
-from obfuscation_module.key.key_types.master_key import MasterKey
+from key.key_types.master_key import MasterKey
 
 import pickle
 import zlib

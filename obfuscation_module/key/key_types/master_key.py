@@ -5,8 +5,8 @@ import zlib
 
 from typing import List,Tuple
 
-from obfuscation_module.key.key_types.zone_key import ZoneKey
-from obfuscation_module.key.key_types.layer import Layer
+from key.key_types.zone_key import ZoneKey
+from key.key_types.layer import Layer
 import codecs
 
 class MasterKey:

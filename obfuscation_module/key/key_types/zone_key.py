@@ -1,6 +1,6 @@
 from typing import List, Tuple
 import copy 
-from obfuscation_module.key.key_types.layer import Layer
+from key.key_types.layer import Layer
 
 
 class ZoneKey:

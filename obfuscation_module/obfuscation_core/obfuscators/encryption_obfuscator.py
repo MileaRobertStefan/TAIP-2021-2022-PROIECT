@@ -12,9 +12,9 @@ from numpy.core.fromnumeric import shape
 from numpy.lib import imag
 
 
-from obfuscation_module.key.key_builder import KeyBuilder
-from obfuscation_module.key.key_types.layer import Layer
-from obfuscation_module.obfuscation_core.obfuscators.obfuscator import Obfuscator
+from key.key_builder import KeyBuilder
+from key.key_types.layer import Layer
+from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 from Crypto.Cipher import AES
 from Crypto import Random

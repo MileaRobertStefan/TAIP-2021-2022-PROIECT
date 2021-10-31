@@ -1,4 +1,4 @@
-from obfuscation_module.key.key_builder import *
+from key.key_builder import *
 
 
 def build_key_test():

@@ -1,5 +1,5 @@
-from obfuscation_module.key.parse_key import *
-from obfuscation_module.key.key_types.master_key import *
+from key.parse_key import *
+from key.key_types.master_key import *
 
 
 

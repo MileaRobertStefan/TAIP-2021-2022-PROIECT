@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from numpy import ndarray
 
-from obfuscation_module.obfuscation_core.deobfusators.deobfuscator import DeObfuscator
+from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 
 
 from Crypto.Cipher import AES

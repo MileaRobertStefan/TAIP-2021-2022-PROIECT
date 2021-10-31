@@ -1,4 +1,4 @@
-from obfuscation_module.key.key_types.export import *  
+from key.key_types.export import *  
 from typing import *
 
 def layer_test():

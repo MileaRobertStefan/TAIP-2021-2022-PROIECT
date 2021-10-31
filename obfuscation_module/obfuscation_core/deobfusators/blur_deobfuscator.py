@@ -1,6 +1,6 @@
 from numpy import ndarray
 
-from obfuscation_module.obfuscation_core.deobfusators.deobfuscator import DeObfuscator
+from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 
 
 class BlurDeObfuscator(DeObfuscator):
