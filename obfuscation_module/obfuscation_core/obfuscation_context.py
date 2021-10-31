@@ -1,10 +1,9 @@
 from numpy import ndarray
 
-from key.key_builder import KeyBuilder
-from obfuscation_core.obfuscators.affine_obfuscator import AffineObfuscator
-from obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
-from obfuscation_core.obfuscators.encryption_obfuscator import EncryptionObfuscator
-from obfuscation_core.obfuscators.scramble_obfuscator import ScrambleObfuscator
+from obfuscation_module.key.key_builder import KeyBuilder
+from obfuscation_module.obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
+from obfuscation_module.obfuscation_core.obfuscators.XOR_obfuscator import XORObfuscator
+from obfuscation_module.obfuscation_core.obfuscators.scramble_obfuscator import ScrambleObfuscator
 
 
 class ObfuscationContext:
@@ -18,10 +17,8 @@ class ObfuscationContext:
     def init_obfuscators():
         blur = BlurObfuscator()
         scramble = ScrambleObfuscator()
-        encryption1 = EncryptionObfuscator()
-        encryption2 = EncryptionObfuscator()
-        affine = AffineObfuscator()
-
+        encryption1 = XORObfuscator()
+        encryption2 = XORObfuscator()
         blur.set_next_obfuscator(scramble)
         scramble.set_next_obfuscator(encryption1)
         encryption1.set_next_obfuscator(encryption2)

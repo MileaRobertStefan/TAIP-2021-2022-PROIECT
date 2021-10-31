@@ -1,6 +1,6 @@
 from numpy import ndarray
 
-from key.key_builder import KeyBuilder
+from obfuscation_module.key.key_builder import KeyBuilder
 
 
 class Obfuscator:

@@ -2,9 +2,9 @@
 import cv2
 from numpy import ndarray
 
-from key.key_builder import KeyBuilder
-from obfuscation_core.factory.deobfuscation_factory import DeobfuscationFactory
-from obfuscation_core.obfuscation_context import ObfuscationContext
+from obfuscation_module.key.key_builder import KeyBuilder
+from obfuscation_module.obfuscation_core.factory.deobfuscation_factory import DeobfuscationFactory
+from obfuscation_module.obfuscation_core.obfuscation_context import ObfuscationContext
 
 
 def get_cut_image(coordinates, image):
@@ -12,10 +12,10 @@ def get_cut_image(coordinates, image):
     return image[y1:y2, x1:x2]
 
 
-if __name__ == '__main__':
+def obfuscation_xor_test():
     cv2.startWindowThread()
-    img: ndarray = cv2.imread('download.jpeg')
-
+    img: ndarray = cv2.imread('tests\\obfuscation_test\download.jpeg')
+    print(img)
     oc = ObfuscationContext()
     oc.init_obfuscators()
     coords = ((0, 0), (100, 100))

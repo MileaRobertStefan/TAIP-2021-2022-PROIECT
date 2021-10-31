@@ -1,9 +1,8 @@
-from key.key_types.zone_key import ZoneKey
-from obfuscation_core.deobfusators.affine_deobfuscator import AffineDeObfuscator
-from obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
-from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
-from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
-from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
+from obfuscation_module.key.key_types.zone_key import ZoneKey
+from obfuscation_module.obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.deobfuscator import DeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.XOR_deobfuscator import XORDeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
 
 
 class DeobfuscationFactory:
@@ -16,9 +15,8 @@ class DeobfuscationFactory:
         starting_deobuscator = None
         switcher = {
             1: BlurDeObfuscator,
-            25: EncryptionDeObfuscator,
-            50: ScrambleDeObfuscator,
-            75: AffineDeObfuscator
+            25: XORDeObfuscator,
+            50: ScrambleDeObfuscator
         }
         for layer in zone_key.layers[::-1]:
             if deobfuscator is None:
