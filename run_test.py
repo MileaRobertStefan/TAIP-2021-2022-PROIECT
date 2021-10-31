@@ -21,10 +21,10 @@ if key_test:
 if obfuscation_test == True:
     from tests.obfuscation_test.XOR_test import *
     from tests.obfuscation_test.encryption_test import*
-    
+    from tests.obfuscation_test.blur_test import*
+
     #obfuscation_xor_test()
     encryption_test()
-
-
+    # blur_test()
       
 
