@@ -21,10 +21,11 @@ if __name__ == '__main__':
     if obfuscation_test == True:
         from integration_tests.obfuscation_test.XOR_test import *
         from tests.integration_tests.obfuscation_test.encryption_test import*
+        from tests.integration_tests.obfuscation_test.blur_test import *
 
         #obfuscation_xor_test()
         encryption_test()
-
+        #blur_test()
 
 
 
