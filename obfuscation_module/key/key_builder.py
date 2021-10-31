@@ -1,13 +1,13 @@
-from typing import List
+from typing import List, Tuple
 
-from key.key_types.layer import Layer
-from key.key_types.zone_key import ZoneKey
-
-
+from obfuscation_module.key.key_types.layer import Layer
+from obfuscation_module.key.key_types.zone_key import ZoneKey
 class KeyBuilder:
-    def __init__(self, coord):
-        self.key: ZoneKey = ZoneKey()
-        self.key.coordonates = coord
+    def __init__(self, coord: Tuple[Tuple[int]]):
+        self.key: ZoneKey = ZoneKey(
+            coord,
+            []
+        )
         self.steps: List[Layer] = []
 
     def reset(self) -> None:
@@ -19,5 +19,7 @@ class KeyBuilder:
         self.steps.append(layer)
 
     def build(self) -> ZoneKey:
-        # compile
+        zk: ZoneKey = ZoneKey(self.key.coordonates, self.steps)
+        self.key = zk
         return self.key
+

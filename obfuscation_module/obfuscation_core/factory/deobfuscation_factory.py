@@ -1,8 +1,8 @@
-from key.key_types.zone_key import ZoneKey
-from obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
-from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
-from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
-from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
+from obfuscation_module.key.key_types.zone_key import ZoneKey
+from obfuscation_module.obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.deobfuscator import DeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
+from obfuscation_module.obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
 
 
 class DeobfuscationFactory:

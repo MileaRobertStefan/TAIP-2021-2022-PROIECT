@@ -3,9 +3,9 @@ from datetime import datetime
 
 from numpy import ndarray
 
-from key.key_builder import KeyBuilder
-from key.key_types.layer import Layer
-from obfuscation_core.obfuscators.obfuscator import Obfuscator
+from obfuscation_module.key.key_builder import KeyBuilder
+from obfuscation_module.key.key_types.layer import Layer
+from obfuscation_module.obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
 class ScrambleObfuscator(Obfuscator):

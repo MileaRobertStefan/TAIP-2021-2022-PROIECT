@@ -1,9 +1,9 @@
 from numpy import ndarray
 
-from key.key_builder import KeyBuilder
-from obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
-from obfuscation_core.obfuscators.encryption_obfuscator import EncryptionObfuscator
-from obfuscation_core.obfuscators.scramble_obfuscator import ScrambleObfuscator
+from obfuscation_module.key.key_builder import KeyBuilder
+from obfuscation_module.obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
+from obfuscation_module.obfuscation_core.obfuscators.encryption_obfuscator import EncryptionObfuscator
+from obfuscation_module.obfuscation_core.obfuscators.scramble_obfuscator import ScrambleObfuscator
 
 
 class ObfuscationContext:
