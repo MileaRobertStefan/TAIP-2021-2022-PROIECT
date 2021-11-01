@@ -12,3 +12,8 @@ Milea Robert - implemented factory, command, chain of responsability for deobfus
 Silviu Ilas - implemented proxy, factory, chain of responsability for deobfuscation for obfuscation core
 Ana Vasiliu - implemented Façade, Builder, Strategy, Singleton  for face detection module
 
+Lab5:
+Roxana Irimia - BPMN diagram for obfuscation component and Affine Cipfher obfuscation layer (+tests)
+Milea Robert - Encryption obfuscation layer (+tests), key management 
+Silviu Ilas - Xor obfuscation layer (+tests), deobfuscation factory
+Ana Vasiliu - Blur obfuscation layer (+tests)
