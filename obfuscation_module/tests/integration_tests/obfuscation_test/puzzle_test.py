@@ -7,6 +7,8 @@ from key.key_builder import KeyBuilder
 from key.key_types.zone_key import ZoneKey
 from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
 from obfuscation_core.obfuscators.puzzle_obfuscator import PuzzleObfuscator
+from obfuscation_core.deobfusators.color_deobfuscator import ColorDeObfuscator
+from obfuscation_core.obfuscators.color_obfuscator import ColorObfuscator
 from tests.integration_tests.obfuscation_test.encryption_test import get_image_path
 
 
@@ -26,6 +28,9 @@ def puzzle_test():
     kb: KeyBuilder = KeyBuilder(s)
     cv2.imshow('Start', img_og)
 
+    # eo3 = ColorObfuscator()
+    # eo3.obfuscate(img, kb)
+
     eo2 = PuzzleObfuscator()
     eo2.obfuscate(img, kb)
 
@@ -37,6 +42,10 @@ def puzzle_test():
     ed2 = PuzzleDeObfuscator()
     ed2.key_data = zk.layers[0].key_data
     ed2.deobfuscate(img)
+
+    # ed3 = ColorDeObfuscator()
+    # ed3.key_data = zk.layers[0].key_data
+    # ed3.deobfuscate(img)
 
     img_og[s[0][0]:s[1][0], s[0][1]:s[1][1]] = img
     cv2.imshow('Final', img_og)

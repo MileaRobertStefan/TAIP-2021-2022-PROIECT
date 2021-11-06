@@ -15,7 +15,7 @@ def my_encode(s):
 
 
 class PuzzleObfuscator(Obfuscator):
-    id = 0xFFAAFA
+    id = 125
 
     def my_custom_random(self, values_to_exclude):
         random_tuple = tuple(random.randint(0, 255) for _ in range(3))
