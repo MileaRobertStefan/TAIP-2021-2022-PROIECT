@@ -5,8 +5,8 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.zone_key import ZoneKey
-from obfuscation_core.deobfusators.color_deobfuscator import ColorDeObfuscator
-from obfuscation_core.obfuscators.color_obfuscator import ColorObfuscator
+from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
+from obfuscation_core.obfuscators.puzzle_obfuscator import PuzzleObfuscator
 from tests.integration_tests.obfuscation_test.encryption_test import get_image_path
 
 
@@ -15,7 +15,7 @@ def get_cut_image(coordinates, image):
     return image[y1:y2, x1:x2]
 
 
-def color_test():
+def puzzle_test():
     cv2.startWindowThread()
     img: ndarray = cv2.imread(get_image_path())
 
@@ -26,7 +26,7 @@ def color_test():
     kb: KeyBuilder = KeyBuilder(s)
     cv2.imshow('Start', img_og)
 
-    eo2 = ColorObfuscator()
+    eo2 = PuzzleObfuscator()
     eo2.obfuscate(img, kb)
 
     zk: ZoneKey = kb.build()
@@ -34,7 +34,7 @@ def color_test():
     img_og[s[0][0]:s[1][0], s[0][1]:s[1][1]] = img
     cv2.imshow('Mid', img_og)
 
-    ed2 = ColorDeObfuscator()
+    ed2 = PuzzleDeObfuscator()
     ed2.key_data = zk.layers[0].key_data
     ed2.deobfuscate(img)
 
@@ -44,4 +44,4 @@ def color_test():
 
 
 if __name__ == '__main__':
-    color_test()
+    puzzle_test()
