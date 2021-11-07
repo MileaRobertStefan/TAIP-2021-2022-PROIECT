@@ -14,6 +14,7 @@ from numpy.lib import imag
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
+from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 from Crypto.Cipher import AES
@@ -28,8 +29,9 @@ def my_encode(s):
 
 class EncryptionObfuscator(Obfuscator):
     key_size = 16
-    id = 0xFFAAFF
+    id = 150
 
+    @time_logged
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         random_generator = Random.new()
         key = random_generator.read(EncryptionObfuscator.key_size)

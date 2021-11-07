@@ -1,6 +1,5 @@
 import face_recognition
 
-from services.face_detection_service import FaceDetectionService
 from utils.types import FaceCoordinates
 
 

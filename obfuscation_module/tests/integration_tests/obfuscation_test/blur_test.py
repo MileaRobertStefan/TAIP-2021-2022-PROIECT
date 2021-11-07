@@ -7,7 +7,7 @@ from key.key_builder import KeyBuilder
 from key.key_types.zone_key import ZoneKey
 from obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
 from obfuscation_core.obfuscators.blur_obfuscator import BlurObfuscator
-from tests.integration_tests.obfuscation_test.encryption_test import get_image_path
+from obfuscation_test import get_image_path
 
 
 def get_cut_image(coordinates, image):
