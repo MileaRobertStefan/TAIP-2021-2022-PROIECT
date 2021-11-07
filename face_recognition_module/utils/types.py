@@ -7,6 +7,3 @@ class Result:
 class FaceCoordinates:
     def __init__(self, coordinates):
         self.top, self.right, self.bottom, self.left = coordinates
-
-    def get_list(self):
-        return self.top, self.right, self.bottom, self.left

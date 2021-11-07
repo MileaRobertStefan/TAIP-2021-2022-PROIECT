@@ -6,6 +6,7 @@ class FaceRecognitionService:
     def __init__(self):
         pass
 
-    def get_faces(self, identity_image, image):
+    @staticmethod
+    def get_faces(identity_image, image):
         faces = RecognitionFacade.detect(identity_image, image)
         return Result(len(faces) > 0, faces)
