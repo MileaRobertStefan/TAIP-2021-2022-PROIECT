@@ -1,4 +1,5 @@
 import copy
+import json
 import pickle as pk
 import zlib
 
@@ -25,6 +26,18 @@ class MasterKey:
         pickled = codecs.encode(pickled, "base64").decode()
         return pickled
 
+    @staticmethod
+    def loadJson(js) -> 'MasterKey':
+        zones = []
+        for zone in js['zones']:
+            layers = []
+            for layer in zone['layers']:
+                layer_obj = Layer(layer['alg_id'], layer['key_data'])
+                layers.append(layer_obj)
+            zone_obj = ZoneKey(zone['coordonates'], layers)
+            zones.append(zone_obj)
+        return  MasterKey(zones)
 
-
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
     pass

@@ -1,3 +1,4 @@
+import json
 from typing import List, Tuple
 import copy 
 from key.key_types.layer import Layer
@@ -18,5 +19,7 @@ class ZoneKey:
     layers  {self.layers}
 \n"""
 
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
     pass
 
