@@ -5,7 +5,8 @@ from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 from obfuscation_core.deobfusators.XOR_deobfuscator import XORDeObfuscator
 from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
 from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
-
+from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
+from obfuscation_core.deobfusators.color_deobfuscator import ColorDeObfuscator
 
 class DeobfuscationFactory:
 
@@ -20,6 +21,8 @@ class DeobfuscationFactory:
             25: XORDeObfuscator,
             50: ScrambleDeObfuscator,
             75: AffineDeObfuscator,
+            100: ColorDeObfuscator,
+            125: PuzzleDeObfuscator,
             0xFFAAFF: EncryptionDeObfuscator
         }
         for layer in zone_key.layers[::-1]:
