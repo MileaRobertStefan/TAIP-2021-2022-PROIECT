@@ -43,7 +43,7 @@ def recognition():
         image = face_recognition.load_image_file("./temp/" + image_filename)
         identity = face_recognition.load_image_file("./temp/" + identity_filename)
 
-        result = FaceRecognitionService.get_faces(identity_image=identity, image=image)
+        result = FaceRecognitionService.get_recognized_faces(identity, image)
 
         os.remove("./temp/"+image_filename)
         os.remove("./temp/"+identity_filename)

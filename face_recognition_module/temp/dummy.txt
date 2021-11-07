@@ -1,0 +1,2 @@
+The temp directory has to exist :D
+Here, the temporary images are saved
