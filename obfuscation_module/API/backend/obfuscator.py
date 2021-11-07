@@ -36,7 +36,7 @@ class Obfuscastor:
                 except KeyError:
                     print("Error!")
             ob: Obfuscator = of.create_obfuscation(commands)
-            chain_of_commands.append((ob, z.coordonates))
+            chain_of_commands.append((ob, z.coordinates))
 
         img = cv.imdecode(np.fromstring(photo.read(), np.uint8), cv.IMREAD_COLOR)
 

@@ -34,7 +34,7 @@ class MasterKey:
             for layer in zone['layers']:
                 layer_obj = Layer(layer['alg_id'], layer['key_data'])
                 layers.append(layer_obj)
-            zone_obj = ZoneKey(zone['coordonates'], layers)
+            zone_obj = ZoneKey(zone['coordinates'], layers)
             zones.append(zone_obj)
         return  MasterKey(zones)
 

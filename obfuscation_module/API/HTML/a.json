@@ -1,78 +1,89 @@
 {
   "zones": [
     {
-      "coordonates": [
+      "coordinates": [
         [
-          0,
-          0
+          161,
+          86
         ],
         [
-          100,
-          100
+          243,
+          168
         ]
       ],
       "layers": [
         {
           "alg_id": 1,
           "key_data": {"key" :  "parola123"}
-        },
-         {
-          "alg_id": 1,
-          "key_data": {"key" :  "parola123"}
-        },
-         {
-          "alg_id": 1,
-          "key_data": {"key" :  "parola123"}
         }
       ]
     },
     {
-      "coordonates": [
+      "coordinates": [
         [
-          100,
-          100
+          69,
+          238
         ],
         [
-          200,
-          200
+          126,
+          295
         ]
       ],
       "layers":[
         {
           "alg_id": 1,
           "key_data": {"key" :  "parola123"}
-        },
-         {
-          "alg_id": 1,
-          "key_data": {"key" :  "parola123"}
-        },
-         {
-          "alg_id": 1,
-          "key_data": {"key" :  "parola123"}
         }
       ]
     },
     {
-      "coordonates": [
+      "coordinates": [
         [
-          300,
+          171,
           300
         ],
         [
-          500,
-          500
+          240,
+          368
         ]
       ],
       "layers": [
         {
           "alg_id": 1,
           "key_data": {"key" :  "parola123"}
-        },
-         {
+        }
+      ]
+    },
+    {
+      "coordinates": [
+        [
+          61,
+          438
+        ],
+        [
+          129,
+          506
+        ]
+      ],
+      "layers": [
+        {
           "alg_id": 1,
           "key_data": {"key" :  "parola123"}
-        },
-         {
+        }
+      ]},
+    {
+      "coordinates": [
+        [
+          185,
+          528
+        ],
+        [
+          253,
+          596
+        ]
+      ],
+      "layers": [
+        {
           "alg_id": 1,
           "key_data": {"key" :  "parola123"}
         }
