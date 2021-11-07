@@ -28,7 +28,7 @@ def my_encode(s):
 
 class EncryptionObfuscator(Obfuscator):
     key_size = 16
-    id = 0xFFAAFF
+    id = 150
 
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         random_generator = Random.new()

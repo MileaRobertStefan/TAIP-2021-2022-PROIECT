@@ -23,7 +23,7 @@ class DeobfuscationFactory:
             75: AffineDeObfuscator,
             100: ColorDeObfuscator,
             125: PuzzleDeObfuscator,
-            0xFFAAFF: EncryptionDeObfuscator
+            150: EncryptionDeObfuscator
         }
         for layer in zone_key.layers[::-1]:
             if deobfuscator is None:

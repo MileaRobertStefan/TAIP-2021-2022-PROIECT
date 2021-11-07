@@ -34,3 +34,7 @@ def master_key_test():
     mk: MasterKey = MasterKey(input_data)
     print(mk)
     print("End Test Master Key")
+
+
+if __name__ == '__main__':
+    layer_test()

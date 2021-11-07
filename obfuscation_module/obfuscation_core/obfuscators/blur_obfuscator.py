@@ -14,7 +14,7 @@ def my_encode(s):
 
 
 class BlurObfuscator(Obfuscator):
-    id = 0xFFAAFA
+    id = 1
 
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Blurring")

@@ -15,4 +15,7 @@ def build_key_test():
     zk: ZoneKey = kb.build()
 
     print(zk)
-        
+
+
+if __name__ == '__main__':
+    build_key_test()

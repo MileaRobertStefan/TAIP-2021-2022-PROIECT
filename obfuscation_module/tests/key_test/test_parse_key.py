@@ -25,4 +25,5 @@ def parse_key_test():
     print(parsed_mk)
 
 
-
+if __name__ == '__main__':
+    parse_key_test()
