@@ -15,8 +15,6 @@ class CommandEncryption(Command):
 
         self.key = params["key"]
 
-
-
     def execute(self) -> EncryptionObfuscator:
         print("Executing CommandEncryption!")
         return EncryptionObfuscator()
