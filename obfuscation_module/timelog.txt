@@ -1,0 +1,12 @@
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 0.001016855239868164
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 0.7136492729187012
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.229447841644287
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.291285514831543
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.292283058166504
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 2.016303539276123
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 0.676321268081665
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.0792436599731445
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.114159107208252
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.1161558628082275
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.926356315612793

@@ -7,6 +7,7 @@ import random
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
+from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
@@ -21,6 +22,7 @@ class ColorObfuscator(Obfuscator):
         random_tuple = tuple(random.randint(0, 255) for _ in range(3))
         return self.my_custom_random(values_to_exclude) if random_tuple in values_to_exclude else random_tuple
 
+    @time_logged
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Coloring...")
         inverted_image = cv2.bitwise_not(image)

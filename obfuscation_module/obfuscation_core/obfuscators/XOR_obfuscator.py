@@ -7,10 +7,12 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
+from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
 class XORObfuscator(Obfuscator):
+    @time_logged
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         random.seed(datetime.now())
         key_data = int(random.random() * 1000000000)
