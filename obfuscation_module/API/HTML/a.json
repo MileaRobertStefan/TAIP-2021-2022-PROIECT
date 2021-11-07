@@ -1,0 +1,82 @@
+{
+  "zones": [
+    {
+      "coordonates": [
+        [
+          0,
+          0
+        ],
+        [
+          100,
+          100
+        ]
+      ],
+      "layers": [
+        {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        }
+      ]
+    },
+    {
+      "coordonates": [
+        [
+          0,
+          0
+        ],
+        [
+          100,
+          100
+        ]
+      ],
+      "layers":[
+        {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        }
+      ]
+    },
+    {
+      "coordonates": [
+        [
+          0,
+          0
+        ],
+        [
+          100,
+          100
+        ]
+      ],
+      "layers": [
+        {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        },
+         {
+          "alg_id": 1,
+          "key_data": {"key" :  "parola123"}
+        }
+      ]
+    }
+  ]
+}

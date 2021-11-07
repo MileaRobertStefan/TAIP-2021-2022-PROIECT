@@ -1,6 +1,6 @@
 from key.parse_key import *
 from key.key_types.master_key import *
-
+import json
 
 
 def parse_key_test():
@@ -16,13 +16,17 @@ def parse_key_test():
 
     mk: MasterKey = MasterKey(zone_keys)
 
-    mk_str: str = mk.to_string()
+    # mk_str: str = mk.to_string()
+    #
+    # print(mk_str)
+    #
+    # parsed_mk: MasterKey = parse_key(mk_str)
+    #
+    # print(parsed_mk)
 
-    print(mk_str)
 
-    parsed_mk: MasterKey = parse_key(mk_str)
-
-    print(parsed_mk)
+    print(  json.dumps(mk.toJson(), indent=4))
 
 
 
+parse_key_test()
