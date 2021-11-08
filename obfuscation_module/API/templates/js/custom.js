@@ -138,18 +138,21 @@ function postToServer(masterKey) {
 }
 
 function submitRect() {
-    let masterkey = []
+    let masterkey = {}
+    masterkey.zones = []
     for (let coord of rectangles) {
         console.log(coord);
         let zone = {}
-        let coordonates = [[coord.y, coord.x], [coord.y + coord.height, coord.x + coord.width]];
-        zone['coordonates'] = coordonates;
+        let coordinates = [[coord.y, coord.x], [coord.y + coord.height, coord.x + coord.width]];
+        zone['coordinates'] = coordinates;
         let layers = []
-        let layer = {'alg_id': 1, 'key_data': 'test'}
+        let layer = {'alg_id': 1, 'key_data': {'key' : "parola123"}}
 
         layers.push(layer);
         zone['layers'] = layers;
-        masterkey.push(zone);
+        masterkey.zones.push(zone);
     }
-    postToServer(masterkey);
+
+
+    postToServer(JSON.stringify(masterkey));
 }
