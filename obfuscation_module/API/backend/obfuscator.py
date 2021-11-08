@@ -40,6 +40,9 @@ class Obfuscastor:
 
         img = cv.imdecode(np.fromstring(photo.read(), np.uint8), cv.IMREAD_COLOR)
 
+        masterKey  = MasterKey([])
+
+
         for obf, coord in chain_of_commands:
             kb: KeyBuilder = KeyBuilder(coord)
             img2 = img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]]
@@ -47,11 +50,13 @@ class Obfuscastor:
 
             img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]] = img2
 
+            masterKey.zones.append(kb.build())
+
         cv.imshow("Poza mea!", img)
 
         cv.waitKey(0)
 
-        return json.dumps(the_json)
+        return json.dumps({"masterKey": masterKey.to_string()})
         pass
 
     def __init__(self):
