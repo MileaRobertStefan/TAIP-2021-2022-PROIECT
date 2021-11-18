@@ -27,6 +27,7 @@ class Obfuscastor:
 
         chain_of_commands = []
         for z in mk.zones:
+            print(z)
             commands: List[Command] = []
             for l in z.layers:
                 try:
@@ -34,12 +35,14 @@ class Obfuscastor:
                     c.set_params(l.key_data)
                     commands.append(c)
                 except KeyError:
-                    print("Error!")
+
+                    print("Error!", l )
+
             ob: Obfuscator = of.create_obfuscation(commands)
             chain_of_commands.append((ob, z.coordinates))
 
         img = cv.imdecode(np.fromstring(photo.read(), np.uint8), cv.IMREAD_COLOR)
-
+        print(chain_of_commands)
         masterKey  = MasterKey([])
 
 
@@ -49,7 +52,6 @@ class Obfuscastor:
             obf.obfuscate(img2, kb)
 
             img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]] = img2
-
             masterKey.zones.append(kb.build())
 
         cv.imshow("Poza mea!", img)

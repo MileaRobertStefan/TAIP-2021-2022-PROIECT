@@ -6,6 +6,7 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
+# from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
@@ -14,8 +15,9 @@ def my_encode(s):
 
 
 class BlurObfuscator(Obfuscator):
-    id = 0xFFAAFA
+    id = 1
 
+    # @time_logged
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Blurring")
         odd_rand_num = random.randrange(19, 29, 2)

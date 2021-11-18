@@ -1,0 +1,60 @@
+{
+  "zones": [
+    {
+      "coordinates": [
+        [
+          161,
+          86
+        ],
+        [
+          243,
+          168
+        ]
+      ],
+      "layers": [
+        {
+          "alg_id": 1,
+          "key_data": {
+             "data": "Affine"
+          }
+        },
+        {
+          "alg_id": 2,
+          "key_data": {
+           "key": "parola123"
+          }
+        },
+        {
+          "alg_id": 3,
+          "key_data": {
+            "scramble_percent": 15
+          }
+        },
+        {
+          "alg_id": 4,
+          "key_data": {
+            "data": ""
+          }
+        },
+        {
+          "alg_id": 5,
+          "key_data": {
+            "puzzle_size": 10
+          }
+        },
+        {
+          "alg_id": 6,
+          "key_data": {
+            "data": ""
+          }
+        },
+        {
+          "alg_id": 7,
+          "key_data": {
+            "data": ""
+          }
+        }
+      ]
+    }
+  ]
+}
