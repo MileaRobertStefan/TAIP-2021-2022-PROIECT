@@ -14,6 +14,10 @@ var load_rect = (event) => {
     const $marquee = $('#marquee');
     const $boxes = $('#boxes');
 
+    document.getElementById("draw").setAttribute("width", $screenshot.width)
+    document.getElementById("draw").setAttribute("height", $screenshot.height)
+    document.getElementById("draw").setAttribute("viewBox", "0 0 " + $screenshot.width + " " + $screenshot.height);
+
     // Temp variables
     let startX = 0;
     let startY = 0;
@@ -45,7 +49,6 @@ var load_rect = (event) => {
         $marquee.classList.remove('hide');
         startX = ev.layerX;
         startY = ev.layerY;
-        drawRect($marquee, startX, startY, 0, 0);
     }
 
     function stopDrag(ev) {
@@ -109,9 +112,18 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#screenshot')
-                .attr('src', e.target.result)
-                .attr('onload', load_rect)
+            const image = new Image();
+            image.src = e.target.result;
+            image.onload = function () {
+                // access image size here
+                console.log(this.width);
+                console.log(this.height);
+                $("#screenshot")
+                    .attr('src', e.target.result)
+                    // .attr("width" , this.width)
+                    // .attr("height" , this.height)
+                    .attr('onload', load_rect)
+            };
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -143,10 +155,9 @@ function submitRect() {
     for (let coord of rectangles) {
         console.log(coord);
         let zone = {}
-        let coordinates = [[coord.y, coord.x], [coord.y + coord.height, coord.x + coord.width]];
-        zone['coordinates'] = coordinates;
+        zone['coordinates'] = [[coord.y, coord.x], [coord.y + coord.height, coord.x + coord.width]];
         let layers = []
-        let layer = {'alg_id': 1, 'key_data': {'key' : "parola123"}}
+        let layer = {'alg_id': 1, 'key_data': {'key': "parola123"}}
 
         layers.push(layer);
         zone['layers'] = layers;

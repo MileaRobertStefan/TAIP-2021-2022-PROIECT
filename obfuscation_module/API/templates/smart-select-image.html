@@ -10,18 +10,29 @@
 
 </head>
 <body>
-<input type='file' id='file' name='file' onchange="readURL(this);"/>
+<div class="center-div" style="flex-direction: column;
+    align-content: center;
+    align-items: center;">
+    <h1>Welcome to our app!</h1>
+    <h2>Insert a picture and select the parts you want to obfuscate</h2>
+    <div class="button-34">
+        <label for="file">Browse...</label>
+        <input type='file' id='file' name='file' onchange="readURL(this);"/>
+    </div>
+</div>
 <br>
 
-<img height="500px" width="500px" id="screenshot"
-     draggable="false">
-<svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <rect id="marquee" x="0" y="0" width="0" height="0"/>
-    <g id="boxes"></g>
-</svg>
-<br>
-<button onclick="submitRect()" style="margin-top: 500px">
-    Submit
-</button>
+<div class="center-div">
+    <img style="height: 50vh" id="screenshot"
+         draggable="false">
+    <svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <rect id="marquee" x="0" y="0" width="0" height="0"/>
+        <g id="boxes"></g>
+    </svg>
+    <br>
+    <button onclick="submitRect()" style="margin-top: 51vh; background-color: #41c200" class="button-34">
+        Submit
+    </button>
+</div>
 </body>
 </html>
