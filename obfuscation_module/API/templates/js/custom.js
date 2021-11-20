@@ -137,7 +137,7 @@ var load_rect = (event) => {
 
     function addInputZone(){
         let el = document.createElement('html');
-        el.innerHTML = "<div>" +
+        el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
                             "<div style='display: inline'>" +
                                 "<span class='custom-dropdown'>"+
                                     "<select class='fancy-selector'>" +
@@ -147,10 +147,10 @@ var load_rect = (event) => {
                                     "</select>" +
                                 "</span>"+
                             "</div> " +
-                            "<div class='generated-key'>" +
-                                "Generated key will be placed here after submiting"+
+                            "<div class='generated-key'>"+
+                                "Zone "+ rectangles.length +" Key"+
                             "</div>"+
-                            "<div class='copy' onclick='copy(this)'>" +
+                            "<div class='copy' onclick='copy(rectangles.length)'>" +
                                 "Copy"+
                             "</div>"+
                         "</div>";

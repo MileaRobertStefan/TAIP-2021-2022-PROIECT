@@ -128,15 +128,19 @@
 }
 
 .generated-key {
-    display: inline;
+    display: inline-block;
     border-radius: 5px 0 0 5px;
     background: #73AD21;
     padding: 10px;
     color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 .copy {
-    display: inline;
+    display: inline-block;
     border-radius: 0 5px 5px 0;
     background: #5E5DF0;
     padding: 10px;
