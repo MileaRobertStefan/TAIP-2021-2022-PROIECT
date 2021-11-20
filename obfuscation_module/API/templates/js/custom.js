@@ -8,11 +8,13 @@ var load_rect = (event) => {
      */
 
     rectangles = []
+    redraw()
     // DOM elements
     const $screenshot = $('#screenshot');
     const $draw = $('#draw');
     const $marquee = $('#marquee');
     const $boxes = $('#boxes');
+    const $boxesText = $('#boxesText');
 
     document.getElementById("draw").setAttribute("width", $screenshot.width)
     document.getElementById("draw").setAttribute("height", $screenshot.height)
@@ -90,11 +92,35 @@ var load_rect = (event) => {
 
     function redraw() {
         boxes.innerHTML = '';
+        boxesTexts.innerHTML = '';
+        let i = 0
         rectangles.forEach((data) => {
+            i += 1
             boxes.appendChild(drawRect(
                 document.createElementNS("http://www.w3.org/2000/svg", 'rect'), data
             ));
+            appendTextToRect(data, i)
         });
+    }
+
+    function appendTextToRect(data, i) {
+        fontSize = 30
+        font = fontSize + "px times new roman";
+
+        canvas = document.createElement("canvas");
+        context = canvas.getContext("2d");
+        context.font = font;
+        width = context.measureText(i).width;
+
+        var svgNS = "http://www.w3.org/2000/svg";
+        var newText = document.createElementNS(svgNS, "text");
+        newText.setAttributeNS(null, "x", (data.x + data.width / 2) - (width / 2));
+        newText.setAttributeNS(null, "y", (data.y + data.height / 2) + 16 / 2);
+        newText.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
+
+        var textNode = document.createTextNode(i);
+        newText.appendChild(textNode);
+        boxesTexts.appendChild(newText);
     }
 
     function drawRect(rect, data) {
