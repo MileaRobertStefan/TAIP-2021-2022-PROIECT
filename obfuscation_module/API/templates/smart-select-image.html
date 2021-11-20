@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
     <script src="{{ url_for('js') }}"></script>
@@ -22,7 +22,7 @@
 </div>
 <br>
 
-<div class="center-div">
+<div class="center-div" style="height: 50vh">
     <img style="height: 50vh" id="screenshot"
          draggable="false">
     <svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -31,9 +31,15 @@
         <g id="boxesTexts"></g>
     </svg>
     <br>
-    <button onclick="submitRect()" style="margin-top: 51vh; background-color: #41c200" class="button-34">
+
+</div>
+<div class="center-div" style="flex-direction: column;
+    align-content: center;
+    align-items: center;">
+    <button onclick="submitRect()" style="background-color: #73AD21" class="button-34">
         Submit
     </button>
+    <div id="input-zones"></div>
 </div>
 </body>
 </html>

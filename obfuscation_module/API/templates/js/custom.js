@@ -1,4 +1,5 @@
 var rectangles = [];
+var zones = []
 
 var load_rect = (event) => {
     const $ = document.querySelector.bind(document);
@@ -9,6 +10,8 @@ var load_rect = (event) => {
 
     rectangles = []
     redraw()
+    document.getElementById("input-zones").innerHTML = ''
+
     // DOM elements
     const $screenshot = $('#screenshot');
     const $draw = $('#draw');
@@ -60,8 +63,8 @@ var load_rect = (event) => {
         if (ev.target === $screenshot && marqueeRect.width && marqueeRect.height && !hitTest(ev.layerX, ev.layerY)) {
             rectangles.push(Object.assign({}, marqueeRect));
             redraw();
+            addInputZone()
         }
-        console.log(rectangles)
     }
 
     function moveDrag(ev) {
@@ -130,6 +133,28 @@ var load_rect = (event) => {
         rect.setAttributeNS(null, 'x', x);
         rect.setAttributeNS(null, 'y', y);
         return rect;
+    }
+
+    function addInputZone(){
+        let el = document.createElement('html');
+        el.innerHTML = "<div>" +
+                            "<div style='display: inline'>" +
+                                "<span class='custom-dropdown'>"+
+                                    "<select class='fancy-selector'>" +
+                                          "<option value='1'>Encryption</option>" +
+                                          "<option value='25'>Afine</option>" +
+                                          "<option value='50'>Mure</option>" +
+                                    "</select>" +
+                                "</span>"+
+                            "</div> " +
+                            "<div class='generated-key'>" +
+                                "Generated key will be placed here after submiting"+
+                            "</div>"+
+                            "<div class='copy' onclick='copy(this)'>" +
+                                "Copy"+
+                            "</div>"+
+                        "</div>";
+        document.getElementById("input-zones").appendChild(el)
     }
 };
 
