@@ -216,7 +216,7 @@ function submitRect() {
         i+=1
         console.log(coord);
         let zone = {}
-        zone['coordinates'] = [[coord.y * image_height_ratio, coord.x * image_width_ratio], [(coord.y + coord.height) * image_height_ratio, (coord.x + coord.width) * image_width_ratio]];
+        zone['coordinates'] = [[(coord.y * image_height_ratio) | 0, (coord.x * image_width_ratio) | 0], [((coord.y + coord.height) * image_height_ratio) | 0, ((coord.x + coord.width) * image_width_ratio) | 0]];
         let layers = []
         id = document.getElementById("input-zone-"+i).getElementsByTagName("select")[0].value
         let layer = {'alg_id': id, 'key_data': {'key': "parola123"}}
