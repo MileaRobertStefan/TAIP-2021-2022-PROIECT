@@ -31,7 +31,7 @@ class Obfuscastor:
             commands: List[Command] = []
             for l in z.layers:
                 try:
-                    c = get_command(l.alg_id)
+                    c = get_command(int(l.alg_id))
                     c.set_params(l.key_data)
                     commands.append(c)
                 except KeyError:

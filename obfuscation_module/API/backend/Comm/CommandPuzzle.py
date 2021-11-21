@@ -12,6 +12,8 @@ class CommandPuzzle(Command):
         pass
 
     def set_params(self, params: dict):
+        if "puzzle_size" not in params.keys():
+            params["puzzle_size"] = 9
         self.puzzle_size = params["puzzle_size"]
         print(params)
 
