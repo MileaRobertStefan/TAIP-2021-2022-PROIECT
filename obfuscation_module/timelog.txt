@@ -64,3 +64,10 @@ INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
 INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0009984970092773438
 INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
 INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.504615306854248
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8008213043212891
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8277840614318848
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8277840614318848
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.2905457019805908
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of 1 second(s)!

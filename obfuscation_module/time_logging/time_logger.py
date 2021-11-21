@@ -36,7 +36,6 @@ def time_logged(func):
 def monitor_obfuscation(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        input_image = args[1].copy()
         start_date = date.today()
         start_time = time.time()
         logger = logging.getLogger('{0}-{1}'.format(func.__qualname__, func.__name__))
@@ -48,8 +47,5 @@ def monitor_obfuscation(func):
         if elapsed > obfuscation_function_time_limit:
             logger.warning('Warning! This function\'s execution exceeded the time limit of {0} second(s)!'
                            .format(obfuscation_function_time_limit))
-
-        output_image = args[1]
-        print(input_image.shape == output_image.shape)
 
     return wrapper
