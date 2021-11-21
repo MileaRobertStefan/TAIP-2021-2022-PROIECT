@@ -5,7 +5,7 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
-from time_logging.time_logger import time_logged
+from time_logging.time_logger import time_logged, monitor_obfuscation
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
@@ -23,7 +23,7 @@ class ScrambleObfuscator(Obfuscator):
         else:
             self.scramble_percent = sp
 
-    @time_logged
+    @monitor_obfuscation
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Scrambling")
 

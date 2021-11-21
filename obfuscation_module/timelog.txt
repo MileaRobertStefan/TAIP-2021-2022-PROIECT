@@ -10,3 +10,64 @@ INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.
 INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.114159107208252
 INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.1161558628082275
 INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-08 , elapsed: 1.926356315612793
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.478412389755249
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7684609889984131
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7961382865905762
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7999351024627686
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.3310394287109375
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.45678019523620605
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7380335330963135
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7819418907165527
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7819418907165527
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.2167744636535645
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of {0} milliseconds!
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.4617643356323242
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7559795379638672
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7821540832519531
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7841465473175049
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.271871566772461
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.000997304916381836
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.46777987480163574
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7739608287811279
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8068726062774658
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8078701496124268
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.3234705924987793
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.4770362377166748
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7981772422790527
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8310890197753906
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8310890197753906
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.3546884059906006
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of 1 second(s)!
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.47284674644470215
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7700521945953369
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8079516887664795
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8099477291107178
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.2836825847625732
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of 1 second(s)!
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0009961128234863281
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.4727334976196289
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.7849302291870117
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8238265514373779
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8248240947723389
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.4451663494110107
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of 1 second(s)!
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0009984970092773438
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:BadObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:PuzzleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.0
+INFO:ColorObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.504615306854248
+INFO:AffineObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8008213043212891
+INFO:EncryptionObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8277840614318848
+INFO:XORObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 0.8277840614318848
+INFO:ScrambleObfuscator.obfuscate-obfuscate:- start date: 2021-11-21 , elapsed: 1.2905457019805908
+WARNING:ScrambleObfuscator.obfuscate-obfuscate:Warning! This function's execution exceeded the time limit of 1 second(s)!
