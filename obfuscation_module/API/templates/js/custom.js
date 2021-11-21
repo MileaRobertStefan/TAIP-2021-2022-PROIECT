@@ -1,6 +1,7 @@
 var rectangles = [];
 var zones = []
-
+var image_width, image_height;
+var image_width_ratio, image_height_ratio;
 var load_rect = (event) => {
     const $ = document.querySelector.bind(document);
 
@@ -22,6 +23,9 @@ var load_rect = (event) => {
     document.getElementById("draw").setAttribute("width", $screenshot.width)
     document.getElementById("draw").setAttribute("height", $screenshot.height)
     document.getElementById("draw").setAttribute("viewBox", "0 0 " + $screenshot.width + " " + $screenshot.height);
+
+    image_width_ratio = image_width / $screenshot.width
+    image_height_ratio = image_height / $screenshot.height
 
     // Temp variables
     let startX = 0;
@@ -167,8 +171,8 @@ function readURL(input) {
             image.src = e.target.result;
             image.onload = function () {
                 // access image size here
-                console.log(this.width);
-                console.log(this.height);
+                image_width = this.width;
+                image_height = this.height;
                 $("#screenshot")
                     .attr('src', e.target.result)
                     // .attr("width" , this.width)
@@ -206,7 +210,7 @@ function submitRect() {
     for (let coord of rectangles) {
         console.log(coord);
         let zone = {}
-        zone['coordinates'] = [[coord.y, coord.x], [coord.y + coord.height, coord.x + coord.width]];
+        zone['coordinates'] = [[coord.y * image_height_ratio, coord.x * image_width_ratio], [(coord.y + coord.height) * image_height_ratio, (coord.x + coord.width) * image_width_ratio]];
         let layers = []
         let layer = {'alg_id': 1, 'key_data': {'key': "parola123"}}
 
