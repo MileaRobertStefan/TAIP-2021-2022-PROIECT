@@ -11,7 +11,7 @@ def load_image(path):
 if __name__ == '__main__':
     image = load_image("photo.jpg")
     identity = load_image("identity.jpg")
-    result = FaceRecognitionService.get_recognized_faces(identity, image)
+    result = FaceRecognitionService.get_recognized_faces("identity.jpg", "photo.jpg")
     if result.has_faces:
         for index, coord in enumerate(result.coordinates):
             face_image = image[coord.top:coord.bottom, coord.left:coord.right]

@@ -10,7 +10,7 @@ def load_image():
 
 if __name__ == '__main__':
     image = load_image()
-    result = FaceDetectionService.get_faces(image)
+    result = FaceDetectionService.get_faces("photo.jpg")
     if result.has_faces:
         for index, coord in enumerate(result.coordinates):
             face_image = image[coord.top:coord.bottom, coord.left:coord.right]
