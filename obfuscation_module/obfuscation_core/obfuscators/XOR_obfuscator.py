@@ -7,12 +7,12 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
-from time_logging.time_logger import time_logged
+# from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 
 class XORObfuscator(Obfuscator):
-    @time_logged
+    # @time_logged
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         random.seed(datetime.now())
         key_data = int(random.random() * 1000000000)
@@ -25,6 +25,6 @@ class XORObfuscator(Obfuscator):
         for i in range(len(image)):
             image[i] = image_encrypt[i]
 
-        print("Encrypting")
+        print("XOR Obfuscator")
         if self.next_obfuscator is not None:
             self.next_obfuscator.obfuscate(image, key_builder)
