@@ -145,9 +145,9 @@ var load_rect = (event) => {
                             "<div style='display: inline'>" +
                                 "<span class='custom-dropdown'>"+
                                     "<select class='fancy-selector'>" +
-                                          "<option value='1'>Encryption</option>" +
-                                          "<option value='25'>Afine</option>" +
-                                          "<option value='50'>Mure</option>" +
+                                          "<option value='2'>Encryption</option>" +
+                                          "<option value='1'>Afine</option>" +
+                                          "<option value='5'>Mure</option>" +
                                     "</select>" +
                                 "</span>"+
                             "</div> " +
@@ -212,7 +212,7 @@ function submitRect() {
         let zone = {}
         zone['coordinates'] = [[coord.y * image_height_ratio, coord.x * image_width_ratio], [(coord.y + coord.height) * image_height_ratio, (coord.x + coord.width) * image_width_ratio]];
         let layers = []
-        let layer = {'alg_id': 1, 'key_data': {'key': "parola123"}}
+        let layer = {'alg_id': 5, 'key_data': {"puzzle_size": 5} }
 
         layers.push(layer);
         zone['layers'] = layers;

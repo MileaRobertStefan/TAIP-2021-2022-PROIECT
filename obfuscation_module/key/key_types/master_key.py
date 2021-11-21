@@ -3,12 +3,12 @@ import json
 import pickle as pk
 import zlib
 
-
-from typing import List,Tuple
+from typing import List, Tuple
 
 from key.key_types.zone_key import ZoneKey
 from key.key_types.layer import Layer
 import codecs
+
 
 class MasterKey:
     zones: List[ZoneKey] = []
@@ -34,10 +34,16 @@ class MasterKey:
             for layer in zone['layers']:
                 layer_obj = Layer(layer['alg_id'], layer['key_data'])
                 layers.append(layer_obj)
-            zone_obj = ZoneKey(zone['coordinates'], layers)
+            print(zone['coordinates'])
+            A, C = zone['coordinates']
+            A = (int(A[0]), int(A[1]))
+            C = (int(C[0]), int(C[1]))
+            print(A ,C )
+            zone_obj = ZoneKey((A, C), layers)
             zones.append(zone_obj)
-        return  MasterKey(zones)
+        return MasterKey(zones)
 
     def toJson(self):
         return json.dumps(self.to_string())
+
     pass
