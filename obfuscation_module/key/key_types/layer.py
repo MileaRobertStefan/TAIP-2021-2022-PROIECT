@@ -1,3 +1,6 @@
+import json
+
+
 class Layer:
     alg_id: int
     key_data: str
@@ -14,3 +17,6 @@ class Layer:
     def __repr__(self) -> str:
         return  f"({self.alg_id} , '{self.key_data}')"
     pass
+
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
