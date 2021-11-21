@@ -14,14 +14,23 @@ class ScrambleObfuscator(Obfuscator):
     #     ((x1, y1), (x2, y2)) = coordinates
     #     return image[y1:y2, x1:x2]
 
-    scramble_percent = 100
+    _scramble_percent = 15
+
+    def __init__(self, sp: int = None):
+        super().__init__()
+        if sp is None:
+            self.scramble_percent = ScrambleObfuscator._scramble_percent
+        else:
+            self.scramble_percent = sp
 
     @monitor_obfuscation
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Scrambling")
+
         random.seed(datetime.now())
         key_data = int(random.random() * 100000000000)
         layer = Layer(50, str(key_data) + "||" + str(self.scramble_percent))
+
         key_builder.set_step(layer)
 
         random.seed(key_data)

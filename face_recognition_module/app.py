@@ -1,9 +1,9 @@
 import json
 import os
 import random
-import face_recognition
 from flask import Flask, request
 
+from core.utils import save_image
 from services.face_detection_service import FaceDetectionService
 from services.face_recognition_service import FaceRecognitionService
 
@@ -19,13 +19,10 @@ def detection():
     image = request.files['photo']
     if '.' in image.filename:
         filename = get_random_filename() + '.' + image.filename.rsplit('.', 1)[1].lower()
-        image.save(os.path.join('temp', filename))
+        save_image(image, filename)
 
-        image = face_recognition.load_image_file("./temp/" + filename)
+        result = FaceDetectionService.get_faces("./temp/" + filename)
 
-        result = FaceDetectionService.get_faces(image)
-
-        os.remove("./temp/"+filename)
         return json.dumps(result.__dict__, default=lambda k: k.__dict__)
     return "400"
 
@@ -37,16 +34,12 @@ def recognition():
     if '.' in image.filename and '.' in identity.filename:
         image_filename = get_random_filename() + '.' + image.filename.rsplit('.', 1)[1].lower()
         identity_filename = get_random_filename() + '.' + identity.filename.rsplit('.', 1)[1].lower()
-        image.save(os.path.join('temp', image_filename))
-        identity.save(os.path.join("temp", identity_filename))
 
-        image = face_recognition.load_image_file("./temp/" + image_filename)
-        identity = face_recognition.load_image_file("./temp/" + identity_filename)
+        save_image(image, image_filename)
+        save_image(identity, identity_filename)
 
-        result = FaceRecognitionService.get_recognized_faces(identity, image)
+        result = FaceRecognitionService.get_recognized_faces("./temp/" + image_filename, "./temp/" + identity_filename)
 
-        os.remove("./temp/"+image_filename)
-        os.remove("./temp/"+identity_filename)
         return json.dumps(result.__dict__, default=lambda k: k.__dict__)
     return "400"
 

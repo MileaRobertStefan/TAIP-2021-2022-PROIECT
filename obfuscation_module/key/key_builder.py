@@ -19,7 +19,7 @@ class KeyBuilder:
         self.steps.append(layer)
 
     def build(self) -> ZoneKey:
-        zk: ZoneKey = ZoneKey(self.key.coordonates, self.steps)
+        zk: ZoneKey = ZoneKey(self.key.coordinates, self.steps)
         self.key = zk
         return self.key
 

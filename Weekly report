@@ -17,3 +17,9 @@ Roxana Irimia - BPMN diagram for obfuscation component and Affine Cipfher obfusc
 Milea Robert - Encryption obfuscation layer (+tests), key management 
 Silviu Ilas - Xor obfuscation layer (+tests), deobfuscation factory
 Ana Vasiliu - Blur obfuscation layer (+tests)
+
+Lab6:
+Roxana Irimia - Face detection & recognition service + API, Time Logging (AOP)
+Milea Robert - Backend integration + API for obfuscation module  
+Silviu Ilas - Frontend that allows selecting regions to obfuscate, BPMN diagram + tests
+Ana Vasiliu - Puzzle obfuscation layer, Color obfuscation layer + tests

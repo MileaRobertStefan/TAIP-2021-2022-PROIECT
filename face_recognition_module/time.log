@@ -1,3 +1,9 @@
-Invocation: name=<function FaceDetectionService.get_faces at 0x00000190EF2783A0>, time=46.596895694732666
-Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001F33A2219D0>, time=3.3593976497650156
-Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001F33A2219D0>, time=3.3593976497650146
+
+Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001B0FF034EE0>, time=3.740556001663208
+Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001B0FF034EE0>, time=3.740556001663208
+Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001B0FF034EE0>, time=3.7420263290405273
+Invocation: name=<function FaceRecognitionService.get_recognized_faces at 0x000001B0FF034EE0>, time=3.7420263290405273
+Invocation: name=<function FaceDetectionService.get_faces at 0x000001B0FF0349D0>, time=49.68549394607544
+Invocation: name=<function FaceDetectionService.get_faces at 0x000001B0FF0349D0>, time=49.68549394607544
+Invocation: name=<function FaceDetectionService.get_faces at 0x000002194E209CA0>, time=32.943849325180054
+Invocation: name=<function FaceDetectionService.get_faces at 0x000002194E209CA0>, time=32.943849325180054

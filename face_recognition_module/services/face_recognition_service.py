@@ -1,7 +1,9 @@
+import os
+
+import face_recognition
 from aop import AspectType
 
 from core.recognition_facade import RecognitionFacade
-from time_logging.time_logger import InvocationLoggerAspect
 from utils.types import Result
 
 
@@ -10,9 +12,13 @@ class FaceRecognitionService(metaclass=AspectType):
         pass
 
     @staticmethod
-    def get_recognized_faces(identity_image, image):
-        faces = RecognitionFacade.detect(identity_image, image)
+    def get_recognized_faces(identity_path, image_path):
+        image = face_recognition.load_image_file(image_path)
+        identity = face_recognition.load_image_file(identity_path)
+
+        faces = RecognitionFacade.detect(identity, image)
+
+        #os.remove(identity_path)
+        #os.remove(image_path)
+
         return Result(len(faces) > 0, faces)
-
-
-FaceRecognitionService.pointcut('get_recognized_faces', InvocationLoggerAspect)

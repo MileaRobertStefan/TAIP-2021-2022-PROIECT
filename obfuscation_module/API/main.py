@@ -1,3 +1,12 @@
+import json
+
+from flask import Flask
+from flask import request, Response
+
+from backend.obfuscator import Obfuscastor
+
+app = Flask("PROIECT TAIP")
+
 from flask import Flask, render_template, make_response
 
 app = Flask(__name__)
@@ -22,11 +31,23 @@ def js():
     return resp
 
 
-@app.route("/obfuscate")
+@app.route("/obfuscate", methods=["GET", "POST"])
 def obfuscate():
-    return "<p>Hello, World!</p>"
+    if request.method == "GET":
+        return " GET "
+
+    if request.method == "POST":
+        photos = request.files['photo']
+        zones = json.loads(request.form['zones'])
+        res = Response(Obfuscastor.post(photos, zones), mimetype='json/txt')
+
+    return res
 
 
 @app.route("/deobfuscate")
 def deobfuscate():
     return "<p>Hello, World!</p>"
+
+
+print("Merge frate!")
+app.run()

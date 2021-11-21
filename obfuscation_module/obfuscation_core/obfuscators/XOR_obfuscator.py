@@ -25,6 +25,6 @@ class XORObfuscator(Obfuscator):
         for i in range(len(image)):
             image[i] = image_encrypt[i]
 
-        print("Encrypting")
+        print("XOR Obfuscator")
         if self.next_obfuscator is not None:
             self.next_obfuscator.obfuscate(image, key_builder)
