@@ -1,0 +1,391 @@
+<!DOCTYPE html >
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+      <title>Scholarly HTML</title>
+      <link rel="stylesheet" href="scholarly.min.css">
+      <script src="scholarly.min.js"></script>
+   </head>
+   <body prefix="schema: http://schema.org">
+      <header>
+         <h1>Rest API Interactive Tool</h1>
+      </header>
+      <div role="contentinfo">
+         <dl>
+            <dt>Authors</dt>
+            <dd>
+               Roxana Irimia
+            </dd>
+            <dd>
+               Milea Robert
+            </dd>
+            <dt>License</dt>
+            <dd>
+               <a href="https://opensource.org/licenses/MIT">MIT</a>
+            </dd>
+            <dt>Github</dt>
+            <dd>
+               <a href="https://github.com/DuArms/TAIP-2021-2022-PROIECT">GitHub repo</a>
+            </dd>
+            <dt>Project video</dt>
+            <dd>
+               <a href="https://www.youtube.com/watch?v=F5lwk6FsPrw&list=RDF5lwk6FsPrw&start_radio=1">Video link</a>
+            </dd>
+         </dl>
+      </div>
+      <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+         <h2>Project abstract</h2>
+         <section typeof="sa:Requirements" id="Requirements">
+            <h3>Requirements</h3>
+            <p>
+               Create a Web application/platform able to model and manage – including operations like query,
+               visualize, recommend,... – the knowledge about <a href="https://www.w3.org/TR/prov-primer/"
+                  title="PROV Model Primer">the provenance</a> of each online newspaper article, which content could
+               be
+               textual or multimedia (pictures, illustrations, presentations, podcasts – audio files available for
+               streaming, videos,...), possibly available in different languages and structured by using
+               meta-data/classification models like <a href="https://www.dublincore.org/specifications/dublin-core/"
+                  title="Details about Dublin Core Metadata Initiative">DCMI</a>, <a
+                  href="https://iptc.org/standards/"
+                  title="Details about International Press Telecommunications Council">ITPC Standards</a> and <a
+                  href="http://vocabulary.semantic-web.at/semweb.html"
+                  title="About Social Semantic Web Thesaurus">Social
+               Semantic Web Thesaurus</a>. Additional (meta)data could be provided by DBpedia and/or Wikidata. A
+               SPARQL
+               endpoint – exposing RDFa and JSON-LD including <a href="http://schema.org/CreativeWork"
+                  title="Details">Creative
+               Work</a> concept from <code>schema.org</code> – is also necessary to provide
+               access to interesting knowledge (<em>e.g.</em>, list fresh editorials concerning a specific topic,
+               provide
+               the articles under 4000 words written in English or Spanish about the international IT contests, offer
+               the
+               title + description of the investigations and/or documentaries posted on Web by the Romanian
+               journalists).
+               For inspiration, study .<a href="https://www.europeana.eu/en/stories"
+                  title="Details about Europeana Stories">Europeana
+               Stories</a> and <a href="https://www.thegazette.co.uk/data" title="Details for developers">The
+               London Gazette</a>.
+               Explore
+               also <a href="https://www.programmableweb.com/category/news-services/api"
+                  title="News Services APIs">News
+               Services APIs</a>
+            </p>
+         </section>
+         <section typeof="sa:Propoused_solution" id="Propoused_solution">
+            <h3>Propoused solution</h3>
+            <p>
+                We propose a multi-service application which will aggregate a multitude of micro-service and will provide a user-friendly interface capable. 
+            </p>
+            <p>
+                The interface should be used to input a link of an OpenAPI and a query formultated in natural language.            </p>
+            <p>
+                We will have a central API point that will play the role of the static delivery hub and of a gateway for the rest of the services. The service we will use are:
+            <ul>
+               <li>
+                  <h4> Transalation Service </h4>
+                  <p>
+                    Will take the natural language query and will translate it to english. English is language used in most OpenAPi descriptions.
+                  </p>
+               </li>
+               <li>
+                  <h4> Preprocessing Service </h4>
+                  <p>
+                    Will interrogate the OpenAPI and process the response in order to extract the keywords. This service will attempt to create a mapping from english words to API routes.
+                  </p>
+               </li>
+               <li>
+                  <h4> NaturalLanguage Service </h4>
+                  <p>
+                    Will use the information provided by Translation Service and Preprocessing Service in order  to compute a query. We will try to use the knowledge we have in order to create a API call and return it to the user.
+                  </p>
+               </li>
+            </ul>
+        
+         </section>
+      </section>
+      <section id="sa:Implementation_details">
+         <!-- review? -->
+         <h2>Implementation details</h2>
+         <section id="Programming_languages">
+            <h3> Programming languages </h3>
+            <p>
+            <h4> Python </h4>
+            <p>
+                We chose Python for it's easy to use and plentiful Machine Learning libraries.
+            </p>
+            <h4> JavaScript </h4>
+            <p>
+                We chose JavaScript for the front-end part of the application. We intend to use a JS framework called
+                Angular in order to create a responsive and modern user interface. 
+            </p>
+   
+         </section>
+        
+      </section>
+      <section id="routes">
+         <h2> API routes </h2>
+         <section id="Gateway_API">
+            <h3> Gateway API</h3>
+            <p>
+            <ul>
+               <li>
+                  <b> GET : /NaturalLanguage </b>
+                  <ul>
+                     <li>
+                        Querry parameters :
+                        <ul>
+                           <li> OpenApiSchemaUrl </li>
+                           <li> NaturalLanguageQuery </li>
+                           <li> NaturalLanguageQueryLanguage </li>
+                        </ul>
+                     </li>
+                     <li>
+                        Body: empty
+                     </li>
+                     <li>
+                        Reasponse:
+                        <ul>
+                           <li>
+                              200 Success:
+                              <code>
+                              {
+                              "url": "https://tesla.crypto.net/api/gallery",
+                              "method": "GET",
+                              "queryParameters": {
+                              "additionalProp1": "string",
+                              "additionalProp2": "string",
+                              "additionalProp3": "string"
+                              },
+                              "body": ""
+                              }
+                              </code>
+                           </li>
+                           <li>
+                              400 Bad input was sent to the API:
+                              <code>
+                              {
+                              "errorCode": 101,
+                              "errorMessage": "The data received is invalid"
+                              }
+                              </code>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+                  
+               </li>
+            </ul>
+            
+         </section>
+         <section id="Preprocessing_API">
+            <h3> Preprocessing API</h3>
+            <p>
+                <ul>
+                    <li>
+                        <b>GET /PreProcessing </b>
+                        <ul>
+                           <li>
+                              Querry parameters :
+                              <ul>
+                                 <li> OpenApiSchemaUrl </li>
+                                 <li> NaturalLanguageString </li>
+                                 <li> </li>
+                              </ul>
+                           </li>
+                           <li>
+                              Body: empty
+                           </li>
+                           <li>
+                              Reasponse:
+                              <ul>
+                                 <li>
+                                    200 Success:
+                                    <code>
+                                    {
+                                    "openApiSchema": "string",
+                                    "resources": [
+                                    "string"
+                                    ],
+                                    "tokens": [
+                                    "string"
+                                    ]
+                                    }
+                                    </code>
+                                 </li>
+                                 <li>
+                                    400 Bad input was sent to the API:
+                                    <code>
+                                    {
+                                    "errorCode": 101,
+                                    "errorMessage": "The data received is invalid"
+                                    }
+                                    </code>
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </li>
+                </ul>
+           
+         </section>
+         <section id="Transalation_API">
+            <h3> Transalation API</h3>
+            <p>
+            <ul>
+                <li>
+                    <b> GET /Translation </b>
+                    <ul>
+                       <li>
+                          Querry parameters :
+                          <ul>
+                             <li> TextLanguage </li>
+                             <li> Text </li>
+                          </ul>
+                       </li>
+                       <li>
+                          Body: empty
+                       </li>
+                       <li>
+                          Reasponse:
+                          <ul>
+                             <li>
+                                200 Success:
+                                <code>
+                                {
+                                "text": "Im hoping this text will be translated."
+                                }
+                                </code>
+                             </li>
+                             <li>
+                                400 Bad input was sent to the API:
+                                <code>
+                                {
+                                "errorCode": 101,
+                                "errorMessage": "The data received is invalid"
+                                }
+                                </code>
+                             </li>
+                          </ul>
+                       </li>
+                    </ul>
+                 </li>
+            </ul>
+            
+         </section>
+         <section id="NaturalLanguageProccesing_API">
+            <h3> NaturalLanguageProccesing API</h3>
+            <p>
+            <ul>
+               <li>
+                  <b>POST: /Nlp </b>
+                  <ul>
+                     <li>
+                        Querry parameters: No parameters
+                     </li>
+                     <li>
+                        Body:
+                        <code>
+                        {
+                        "openApiSchema": "string",
+                        "resources": [
+                        "string"
+                        ],
+                        "tokens": [
+                        "string"
+                        ]
+                        }
+                        </code>
+                     </li>
+                     <li>
+                        Reasponse:
+                        <ul>
+                           <li>
+                              200 Success:
+                              <code>
+                              {
+                              "url": "https://tesla.crypto.net/api/gallery",
+                              "method": "GET",
+                              "queryParameters": {
+                              "additionalProp1": "string",
+                              "additionalProp2": "string",
+                              "additionalProp3": "string"
+                              },
+                              "body": ""
+                              }
+                              </code>
+                           </li>
+                           <li>
+                              400 Bad input was sent to the API:
+                              <code>
+                              {
+                              "errorCode": 101,
+                              "errorMessage": "The data received is invalid"
+                              }
+                              </code>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+           
+         </section>
+      </section>
+
+      <section id="Tehnologies">
+         <h2> Tehnologies </h2>
+
+        <section id="Azure_functions">
+            <h3> Azure functions </h3>
+            <p>
+                Azure Functions is a cloud service available on-demand that provides all the continually
+                updated infrastructure and resources needed to run your applications. 
+                You focus on the pieces of code that matter most to you, and Functions handles the rest.
+                Functions provides serverless compute for Azure. 
+            </p>
+        </section>
+
+        <section id="Angular">
+            <h3> Angular </h3>
+            <p>
+                Angular is an application design framework and development 
+                platform for creating efficient and sophisticated single-page apps.  
+            </p>
+        </section>
+
+        <section id="Google_Translate_API">
+            <h3> Cloud Translation API  </h3>
+            <p>
+                Integrates text translation into your website or application. To call this service, we recommend that you use the Google-provided client libraries. If your application needs to use your own libraries to call this service, use the following information when you make the API requests.
+                A Discovery Document is a machine-readable specification for describing and consuming REST APIs. It is used to build client libraries, IDE plugins, and other tools that interact with Google APIs. One service may provide multiple discovery documents. This service provides the following discovery documents:
+            </p>
+        </section>
+
+        <section id="Git">
+            <h3> Git </h3>
+            <p>
+                Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+            </p>
+        </section>
+
+        <section id="scikit-learn">
+            <h3> Scikit-learn </h3>
+            <p>
+                Scikit-learn is a library in Python that provides many unsupervised and supervised learning algorithms. It’s built upon some of the technology we are already familiar with like with, like NumPy, Pandas, and Matplotlib.
+            </p>
+        </section>
+
+
+      </section>
+      <section id="Final_words">
+         <h2> Final words</h2>
+         <p>
+
+            We are eager to implement this project.
+            Updates will come!
+
+         </p>
+      </section>
+   </body>
+</html>
