@@ -23,3 +23,9 @@ Roxana Irimia - Face detection & recognition service + API, Time Logging (AOP)
 Milea Robert - Backend integration + API for obfuscation module  
 Silviu Ilas - Frontend that allows selecting regions to obfuscate, BPMN diagram + tests
 Ana Vasiliu - Puzzle obfuscation layer, Color obfuscation layer + tests
+
+Lab7:
+Roxana Irimia - MOP - face detection
+Milea Robert - API & backend work  
+Silviu Ilas - FrontEnd work & integration
+Ana Vasiliu - MOP - obfuscation
