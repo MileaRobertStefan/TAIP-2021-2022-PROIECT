@@ -1,14 +1,12 @@
 import codecs
-
-import cv2
-from numpy import ndarray
-import numpy as np
 import random
+
+from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
-#from time_logging.time_logger import time_logged
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
+from time_logging.time_logger import monitor_obfuscation
 
 
 def my_encode(s):
@@ -18,7 +16,7 @@ def my_encode(s):
 class PuzzleObfuscator(Obfuscator):
     id = 125
 
-    def __init__(self, puzzle_size : int = None):
+    def __init__(self, puzzle_size: int = None):
         super().__init__()
 
         if puzzle_size is not None:
@@ -30,13 +28,13 @@ class PuzzleObfuscator(Obfuscator):
         random_tuple = tuple(random.randint(0, 255) for _ in range(3))
         return self.my_custom_random(values_to_exclude) if random_tuple in values_to_exclude else random_tuple
 
-    #@time_logged
+    @monitor_obfuscation
     def obfuscate(self, image: ndarray, key_builder: KeyBuilder):
         print("Creating puzzle...")
 
-        puzzle_piece_height = max( len(image) // self.puzzle_size , 5)
-        puzzle_piece_width = max( len(image[0]) // self.puzzle_size, 5)
-        print(puzzle_piece_height , puzzle_piece_width)
+        puzzle_piece_height = max(len(image) // self.puzzle_size, 5)
+        puzzle_piece_width = max(len(image[0]) // self.puzzle_size, 5)
+        print(puzzle_piece_height, puzzle_piece_width)
         puzzle_pieces_coords = []
         for i in range(0, self.puzzle_size):
             if (i + 1) * puzzle_piece_height < len(image):

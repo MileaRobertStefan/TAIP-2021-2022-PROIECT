@@ -10,7 +10,6 @@ class PuzzleDeObfuscator(DeObfuscator):
     def deobfuscate(self, image: ndarray) -> None:
         print("Removing puzzle obfuscation...")
         values = self.key_data.split("|")
-        puzzle_size = values[0]
         values.pop()
         i0_originals = [int(x) for x in values[1::8]]
         i1_originals = [int(x) for x in values[2::8]]

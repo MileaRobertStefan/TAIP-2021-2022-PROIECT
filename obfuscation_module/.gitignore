@@ -2,3 +2,4 @@ venv
 **/**/__init__.py
 .idea
 **/**/__pycache__
+.coverage
