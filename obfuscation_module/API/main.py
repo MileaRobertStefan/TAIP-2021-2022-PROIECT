@@ -7,12 +7,12 @@ from backend.obfuscator import Obfuscastor
 
 app = Flask("PROIECT TAIP")
 
-from flask import Flask, render_template, make_response
+from flask import Flask, render_template, make_response, send_from_directory
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/obfuscate-page")
 def template_test():
     return render_template('smart-select-image.html', my_string="Wheeeee!", my_list=[0, 1, 2, 3, 4, 5])
 
@@ -29,6 +29,10 @@ def js():
     resp = make_response(render_template("js/custom.js"))
     resp.headers['Content-type'] = 'text/javascript'
     return resp
+
+@app.route('/images/<path:path>')
+def send_js(path):
+    return send_from_directory('backend/images', path)
 
 
 @app.route("/obfuscate", methods=["GET", "POST"])

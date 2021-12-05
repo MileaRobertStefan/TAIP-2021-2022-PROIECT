@@ -1,17 +1,19 @@
+import os
+from random import random
 from typing import *
 
-import json
-
-from key.key_types.master_key import MasterKey
-from key.key_types.zone_key import ZoneKey
-from key.key_builder import KeyBuilder
-
-from obfuscation_core.factory.obfuscastor_factory import ObfuscationFactory
-from API.backend.Comm.export import *
-from obfuscation_core.obfuscators.obfuscator import Obfuscator
+import cv2
 import numpy as np
 
-import cv2
+from API.backend.Comm.export import *
+from key.key_builder import KeyBuilder
+from key.key_types.master_key import MasterKey
+from obfuscation_core.factory.obfuscastor_factory import ObfuscationFactory
+from obfuscation_core.obfuscators.obfuscator import Obfuscator
+
+from PIL import Image
+
+
 of = ObfuscationFactory()
 
 
@@ -35,15 +37,14 @@ class Obfuscastor:
                     commands.append(c)
                 except KeyError:
 
-                    print("Error!", l )
+                    print("Error!", l)
 
             ob: Obfuscator = of.create_obfuscation(commands)
             chain_of_commands.append((ob, z.coordinates))
 
         img = cv2.imdecode(np.fromstring(photo.read(), np.uint8), cv2.IMREAD_COLOR)
         print(chain_of_commands)
-        masterKey  = MasterKey([])
-
+        masterKey = MasterKey([])
 
         for obf, coord in chain_of_commands:
             kb: KeyBuilder = KeyBuilder(coord)
@@ -56,7 +57,11 @@ class Obfuscastor:
         cv2.imshow("Poza mea!", img)
 
         cv2.waitKey(0)
-
+        __location__ = os.path.realpath(
+            os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        random_name = str(int(random() * 100000000))
+        im = Image.fromarray(img)
+        im.save(__location__ + "/images/" + random_name + ".png")
         return masterKey.encodedZoneKeys()
 
     def __init__(self):
