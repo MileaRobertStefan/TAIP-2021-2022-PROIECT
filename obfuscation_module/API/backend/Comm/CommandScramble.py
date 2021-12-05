@@ -11,7 +11,7 @@ class CommandScramble(Command):
         pass
 
     def set_params(self, params : dict) :
-        self.scramble_percent = params["scramble_percent"]
+        # self.scramble_percent = params["scramble_percent"]
         print(params)
 
 
