@@ -196,3 +196,28 @@ INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 20:35:05] "POST /detection HTTP/1.1" 20
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 20:35:05] "POST /detection HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 20:36:54] "POST /detection HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 20:41:04] "POST /detection HTTP/1.1" 200 -
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.1.199:5001/ (Press CTRL+C to quit)
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://192.168.1.199:5001/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 21:32:21] "POST /detection HTTP/1.1" 200 -
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'sRGB' 41 1
+DEBUG:PIL.PngImagePlugin:STREAM b'gAMA' 54 4
+DEBUG:PIL.PngImagePlugin:STREAM b'pHYs' 70 9
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 91 65445
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 21:56:49] "POST /detection HTTP/1.1" 200 -
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'sRGB' 41 1
+DEBUG:PIL.PngImagePlugin:STREAM b'gAMA' 54 4
+DEBUG:PIL.PngImagePlugin:STREAM b'pHYs' 70 9
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 91 65445
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 22:00:58] "POST /detection HTTP/1.1" 200 -
+DEBUG:PIL.PngImagePlugin:STREAM b'IHDR' 16 13
+DEBUG:PIL.PngImagePlugin:STREAM b'sRGB' 41 1
+DEBUG:PIL.PngImagePlugin:STREAM b'gAMA' 54 4
+DEBUG:PIL.PngImagePlugin:STREAM b'pHYs' 70 9
+DEBUG:PIL.PngImagePlugin:STREAM b'IDAT' 91 65445
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2021 22:08:57] "POST /detection HTTP/1.1" 200 -

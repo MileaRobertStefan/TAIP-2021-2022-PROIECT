@@ -275,6 +275,50 @@ function submitRect() {
     postToServer(JSON.stringify(masterkey));
 }
 
+const appendTextToRectangle = (boxesTexts, rectangle, text) => {
+    const font = "30px times new roman";
+    const canvas = document.createElement("canvas");
+    const canvasContext = canvas.getContext("2d");
+    const textWidth = canvasContext.measureText(text).width;
+
+    canvasContext.font = font;
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    const textContainer = document.createElementNS(svgNS, "text");
+
+    textContainer.setAttributeNS(null, "x", (rectangle.x + rectangle.width / 2) - (textWidth / 2));
+    textContainer.setAttributeNS(null, "y", (rectangle.y + rectangle.height / 2) + 16 / 2);
+    textContainer.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
+
+    const textNode = document.createTextNode(text);
+    textContainer.appendChild(textNode);
+    boxesTexts.appendChild(textContainer);
+};
+
+const drawRectangle = (rectangleContainer, rectangleData) => {
+    const { x, y, width, height } = rectangleData;
+    rectangleContainer.setAttributeNS(null, 'width', width);
+    rectangleContainer.setAttributeNS(null, 'height', height);
+    rectangleContainer.setAttributeNS(null, 'x', x);
+    rectangleContainer.setAttributeNS(null, 'y', y);
+    return rectangleContainer;
+};
+
+const redrawRectangles = () => {
+    const boxes = document.getElementById("boxes");
+    const boxesText = document.getElementById("boxesText");
+
+    boxes.innerHTML = "";
+    boxesTexts.innerHTML = "";
+
+    rectangles.forEach((rectangle, idx) => {
+        boxes.appendChild(drawRectangle(
+            document.createElementNS("http://www.w3.org/2000/svg", 'rect'), rectangle
+        ));
+        appendTextToRectangle(boxesTexts, rectangle, idx + 1);
+    });
+};
+
 function faceDetection() {
     postToServerForFaceDetection();
 }
@@ -283,12 +327,17 @@ function processDetectedFaces(coordinates) {
     console.log("obfuscating faces...");
     for (let coords of coordinates) {
          console.log("for coordinate...");
-         if (!hitTest(coords.top, coords.right)) {
+//         if (!hitTest(coords.top, coords.right)) {
             console.log(coords);
-//            rectangles.push({coords.top, coords.left, coords.right - coords.left, coords.bottom - coords.top});
-            redraw();
+            rectangles.push({
+                x: coords.left / image_width_ratio,
+                y: coords.top / image_height_ratio,
+                width: (coords.right - coords.left) / image_width_ratio,
+                height: (coords.bottom - coords.top) / image_height_ratio
+            });
+            redrawRectangles();
             addInputZone();
-        }
+//        }
     }
 }
 function copy(i) {
