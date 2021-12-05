@@ -62,5 +62,5 @@ def deobfuscate():
     return "<p>Hello, World!</p>"
 
 
-print("Merge frate!")
+print("http://127.0.0.1:5000/obfuscate-page")
 app.run()

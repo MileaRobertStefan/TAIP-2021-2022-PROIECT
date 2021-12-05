@@ -56,6 +56,7 @@ class Obfuscastor:
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
         random_name = str(int(random() * 100000000))
         cv2.imwrite(__location__ + "/images/" + random_name + ".png", img)
+
         return json.dumps({
             "image_id": random_name,
             "zone_keys": masterKey.encodedZoneKeys()
