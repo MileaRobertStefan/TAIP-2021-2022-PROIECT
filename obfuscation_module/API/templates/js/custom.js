@@ -206,10 +206,13 @@ function postToServer(masterKey) {
             processData: false,
         }).done((data) => {
             let i = 0
-            Object.keys(data).forEach((key) => {
-                $('.generated-key')[i].innerHTML = data[key]
+            data.image_id = JSON.parse(data.image_id)
+            data.zone_keys = JSON.parse(data.zone_keys)
+            Object.keys(data.zone_keys).forEach((key) => {
+                $('.generated-key')[i].innerHTML = data.zone_keys[key]
                 i++;
             })
+            showObfuscateLink(data.image_id)
         });
     }
 }
@@ -236,7 +239,14 @@ function submitRect() {
     postToServer(JSON.stringify(masterkey));
 }
 
-function copy(i){
-    copyText = $('.generated-key')[i-1]
+function copy(i) {
+    copyText = $('.generated-key')[i - 1]
     navigator.clipboard.writeText(copyText.innerHTML);
+}
+
+function showObfuscateLink(img_name) {
+    $("#link-to-obfuscate-pic")
+        .attr("href", "/images/" + img_name.toString() + ".png")
+        .css("display", "inline")
+        .html("Click here to go to the obfuscated picture")
 }

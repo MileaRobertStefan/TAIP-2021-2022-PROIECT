@@ -1,18 +1,17 @@
+import json
 import os
 from random import random
 from typing import *
 
 import cv2
 import numpy as np
+from PIL import Image
 
 from API.backend.Comm.export import *
 from key.key_builder import KeyBuilder
 from key.key_types.master_key import MasterKey
 from obfuscation_core.factory.obfuscastor_factory import ObfuscationFactory
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
-
-from PIL import Image
-
 
 of = ObfuscationFactory()
 
@@ -62,7 +61,10 @@ class Obfuscastor:
         random_name = str(int(random() * 100000000))
         im = Image.fromarray(img)
         im.save(__location__ + "/images/" + random_name + ".png")
-        return masterKey.encodedZoneKeys()
+        return json.dumps({
+            "image_id": random_name,
+            "zone_keys": masterKey.encodedZoneKeys()
+        })
 
     def __init__(self):
         pass
