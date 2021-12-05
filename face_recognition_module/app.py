@@ -4,12 +4,13 @@ import random
 from flask import Flask, request
 from flask_cors import CORS
 
-from core.utils import save_image
+from core.utils import save_image, delete_image
 from services.face_detection_service import FaceDetectionService
 from services.face_recognition_service import FaceRecognitionService
 
 app = Flask(__name__)
 CORS(app)
+
 
 def get_random_filename():
     return str(random.randint(0, 10000000))
@@ -23,6 +24,8 @@ def detection():
         save_image(image, filename)
 
         result = FaceDetectionService.get_faces("./temp/" + filename)
+
+        delete_image("./temp/" + filename)
 
         return json.dumps(result.__dict__, default=lambda k: k.__dict__)
     return "400"
@@ -40,6 +43,9 @@ def recognition():
         save_image(identity, identity_filename)
 
         result = FaceRecognitionService.get_recognized_faces("./temp/" + image_filename, "./temp/" + identity_filename)
+
+        delete_image("./temp/" + image_filename)
+        delete_image("./temp/" + identity_filename)
 
         return json.dumps(result.__dict__, default=lambda k: k.__dict__)
     return "400"

@@ -1,5 +1,3 @@
-import os
-
 import face_recognition
 from aop import AspectType
 
@@ -17,8 +15,5 @@ class FaceRecognitionService(metaclass=AspectType):
         identity = face_recognition.load_image_file(identity_path)
 
         faces = RecognitionFacade.detect(identity, image)
-
-        #os.remove(identity_path)
-        #os.remove(image_path)
 
         return Result(len(faces) > 0, faces)
