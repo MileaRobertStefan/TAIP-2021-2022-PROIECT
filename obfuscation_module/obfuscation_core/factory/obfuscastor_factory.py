@@ -3,7 +3,7 @@ from typing import List
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 from API.backend.Comm.command import Command
 
-from obfuscation_core.obfuscators.blur_obfuscator import *
+# from obfuscation_core.obfuscators.blur_obfuscator import *
 from obfuscation_core.obfuscators.XOR_obfuscator import *
 from obfuscation_core.obfuscators.scramble_obfuscator import *
 from obfuscation_core.obfuscators.affine_obfuscator import *
@@ -14,7 +14,7 @@ from obfuscation_core.obfuscators.encryption_obfuscator import *
 
 class ObfuscationFactory:
     switcher = {
-        1: BlurObfuscator,
+        # 1: BlurObfuscator,
         25: XORObfuscator,
         50: ScrambleObfuscator,
         75: AffineObfuscator,

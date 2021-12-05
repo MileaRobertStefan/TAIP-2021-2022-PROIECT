@@ -208,6 +208,30 @@ function postToServer(masterKey) {
     }
 }
 
+function postToServerForFaceDetection() {
+    var fd = new FormData();
+    console.log($('#file'));
+    var files = $('#file')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+        fd.append('photo', files[0]);
+        $.ajax({
+            url: 'http://localhost:5001/detection',
+            type: 'post',
+            data: fd,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response);
+                if (response.has_faces === true)
+                    processDetectedFaces(response.coordinates);
+            }
+        });
+    }
+}
+
 function submitRect() {
     let masterkey = {}
     masterkey.zones = []
@@ -228,4 +252,21 @@ function submitRect() {
 
 
     postToServer(JSON.stringify(masterkey));
+}
+
+function faceDetection() {
+    postToServerForFaceDetection();
+}
+
+function processDetectedFaces(coordinates) {
+    console.log("obfuscating faces...");
+    for (let coords of coordinates) {
+         console.log("for coordinate...");
+         if (!hitTest(coords.top, coords.right)) {
+            console.log(coords);
+//            rectangles.push({coords.top, coords.left, coords.right - coords.left, coords.bottom - coords.top});
+            redraw();
+            addInputZone();
+        }
+    }
 }

@@ -4,7 +4,7 @@ from API.backend.Comm.CommandEncryption import *
 from API.backend.Comm.CommandScramble import *
 from API.backend.Comm.CommandColor import *
 from API.backend.Comm.CommandPuzzle import *
-from API.backend.Comm.CommandBlur import *
+# from API.backend.Comm.CommandBlur import *
 from API.backend.Comm.CommandXOR import *
 
 ALL_COMMANDS_DICT = {
@@ -13,7 +13,7 @@ ALL_COMMANDS_DICT = {
     CommandScramble.id: CommandScramble,
     CommandColor.id: CommandColor,
     CommandPuzzle.id: CommandPuzzle,
-    CommandBlur.id : CommandBlur,
+    # CommandBlur.id : CommandBlur,
     CommandXOR.id : CommandXOR
 }
 
