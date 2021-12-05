@@ -10,37 +10,22 @@
 
 </head>
 <body>
-<div class="center-div" style="flex-direction: column;
-    align-content: center;
-    align-items: center;">
-    <h1>Welcome to our app!</h1>
-    <h2>Insert a picture and select the parts you want to obfuscate</h2>
-    <div class="button-34">
-        <label for="file">Browse...</label>
-        <input type='file' id='file' name='file' onchange="readURL(this);"/>
-    </div>
-</div>
-<br>
-
 <div class="center-div" style="height: 50vh">
-    <img style="height: 50vh" id="screenshot"
+    <img style="height: 50vh" id="screenshot" src="/images/{{img_name}}"
          draggable="false">
-    <svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-        <rect id="marquee" x="0" y="0" width="0" height="0"/>
-        <g id="boxes"></g>
-        <g id="boxesTexts"></g>
-    </svg>
-    <br>
-
 </div>
 <div class="center-div" style="flex-direction: column;
     align-content: center;
     align-items: center;">
-    <button onclick="submitRect()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
+    <button onclick="addDeobfuscationInputZone()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
+            class="button-34">
+        Add key
+    </button>
+    <div id="input-zones"></div>
+    <button id='submit-input-zones' onclick="sendToDeofuscationApi()" style="display: none; background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
             class="button-34">
         Submit
     </button>
-    <div id="input-zones"></div>
 </div>
 <div class="center-div">
     <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>

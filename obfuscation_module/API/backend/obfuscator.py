@@ -1,17 +1,17 @@
+import json
+import os
+from random import random
 from typing import *
 
-import json
-
-from key.key_types.master_key import MasterKey
-from key.key_types.zone_key import ZoneKey
-from key.key_builder import KeyBuilder
-
-from obfuscation_core.factory.obfuscastor_factory import ObfuscationFactory
-from API.backend.Comm.export import *
-from obfuscation_core.obfuscators.obfuscator import Obfuscator
+import cv2
 import numpy as np
+from PIL import Image
 
-from cv2 import cv2 as cv
+from API.backend.Comm.export import *
+from key.key_builder import KeyBuilder
+from key.key_types.master_key import MasterKey
+from obfuscation_core.factory.obfuscastor_factory import ObfuscationFactory
+from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 of = ObfuscationFactory()
 
@@ -36,15 +36,14 @@ class Obfuscastor:
                     commands.append(c)
                 except KeyError:
 
-                    print("Error!", l )
+                    print("Error!", l)
 
             ob: Obfuscator = of.create_obfuscation(commands)
             chain_of_commands.append((ob, z.coordinates))
 
-        img = cv.imdecode(np.fromstring(photo.read(), np.uint8), cv.IMREAD_COLOR)
+        img = cv2.imdecode(np.fromstring(photo.read(), np.uint8), cv2.IMREAD_COLOR)
         print(chain_of_commands)
-        masterKey  = MasterKey([])
-
+        masterKey = MasterKey([])
 
         for obf, coord in chain_of_commands:
             kb: KeyBuilder = KeyBuilder(coord)
@@ -54,12 +53,18 @@ class Obfuscastor:
             img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]] = img2
             masterKey.zones.append(kb.build())
 
-        cv.imshow("Poza mea!", img)
+        cv2.imshow("Poza mea!", img)
 
-        cv.waitKey(0)
-
-        return json.dumps({"masterKey": masterKey.to_string()})
-        pass
+        cv2.waitKey(0)
+        __location__ = os.path.realpath(
+            os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        random_name = str(int(random() * 100000000))
+        im = Image.fromarray(img)
+        im.save(__location__ + "/images/" + random_name + ".png")
+        return json.dumps({
+            "image_id": random_name,
+            "zone_keys": masterKey.encodedZoneKeys()
+        })
 
     def __init__(self):
         pass

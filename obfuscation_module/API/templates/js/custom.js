@@ -138,8 +138,9 @@ var load_rect = (event) => {
         rect.setAttributeNS(null, 'y', y);
         return rect;
     }
+};
 
-    function addInputZone(){
+function addInputZone() {
         let el = document.createElement('html');
         el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
                             "<div style='display: inline'>" +
@@ -158,13 +159,24 @@ var load_rect = (event) => {
                             "<div class='generated-key'>"+
                                 "Zone "+ rectangles.length +" Key"+
                             "</div>"+
-                            "<div class='copy' onclick='copy(rectangles.length)'>" +
+                            "<div class='copy' onclick='copy(" + rectangles.length+ ")'>" +
                                 "Copy"+
                             "</div>"+
                         "</div>";
         document.getElementById("input-zones").appendChild(el)
-    }
-};
+}
+
+function addDeobfuscationInputZone(){
+    $('#submit-input-zones').css("display", "inline");
+    let el = document.createElement('html');
+    el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
+                        "<input class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
+                    "</div>";
+    document.getElementById("input-zones").appendChild(el)
+}
+
+function sendToDeofuscationApi(){
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -204,6 +216,15 @@ function postToServer(masterKey) {
             data: fd,
             contentType: false,
             processData: false,
+        }).done((data) => {
+            let i = 0
+            data.image_id = JSON.parse(data.image_id)
+            data.zone_keys = JSON.parse(data.zone_keys)
+            Object.keys(data.zone_keys).forEach((key) => {
+                $('.generated-key')[i].innerHTML = data.zone_keys[key]
+                i++;
+            })
+            showObfuscateLink(data.image_id)
         });
     }
 }
@@ -211,14 +232,14 @@ function postToServer(masterKey) {
 function submitRect() {
     let masterkey = {}
     masterkey.zones = []
-    let i= 0;
+    let i = 0;
     for (let coord of rectangles) {
-        i+=1
+        i += 1
         console.log(coord);
         let zone = {}
         zone['coordinates'] = [[(coord.y * image_height_ratio) | 0, (coord.x * image_width_ratio) | 0], [((coord.y + coord.height) * image_height_ratio) | 0, ((coord.x + coord.width) * image_width_ratio) | 0]];
         let layers = []
-        id = document.getElementById("input-zone-"+i).getElementsByTagName("select")[0].value
+        id = document.getElementById("input-zone-" + i).getElementsByTagName("select")[0].value
         let layer = {'alg_id': id, 'key_data': {'key': "parola123"}}
 
         layers.push(layer);
@@ -228,4 +249,16 @@ function submitRect() {
 
 
     postToServer(JSON.stringify(masterkey));
+}
+
+function copy(i) {
+    copyText = $('.generated-key')[i - 1]
+    navigator.clipboard.writeText(copyText.innerHTML);
+}
+
+function showObfuscateLink(img_name) {
+    $("#link-to-obfuscate-pic")
+        .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
+        .css("display", "inline")
+        .html("Click here to go to the obfuscated picture")
 }
