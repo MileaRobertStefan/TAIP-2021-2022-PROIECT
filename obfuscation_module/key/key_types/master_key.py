@@ -1,14 +1,13 @@
+import codecs
 import copy
 import json
 import pickle as pk
 import zlib
+from typing import List
 
-
-from typing import List,Tuple
-
-from key.key_types.zone_key import ZoneKey
 from key.key_types.layer import Layer
-import codecs
+from key.key_types.zone_key import ZoneKey
+
 
 class MasterKey:
     zones: List[ZoneKey] = []
@@ -36,7 +35,18 @@ class MasterKey:
                 layers.append(layer_obj)
             zone_obj = ZoneKey(zone['coordinates'], layers)
             zones.append(zone_obj)
-        return  MasterKey(zones)
+        return MasterKey(zones)
+
+    def encodedZoneKeys(self):
+        to_ret = {}
+        i = 1
+        for z in self.zones:
+            pickled = pk.dumps(z)
+            pickled = zlib.compress(pickled)
+            pickled = codecs.encode(pickled, "base64").decode()
+            to_ret["zone_" + str(i)] = pickled
+            i += 1
+        return json.dumps(to_ret)
 
     def toJson(self):
         return json.dumps(self.to_string())
