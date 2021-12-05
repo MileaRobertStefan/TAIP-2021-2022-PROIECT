@@ -1,13 +1,13 @@
 import json
 
 from flask import Flask
-from flask import request, Response
+from flask import Response
 
 from backend.obfuscator import Obfuscastor
 
 app = Flask("PROIECT TAIP")
 
-from flask import Flask, render_template, make_response, send_from_directory ,request
+from flask import Flask, render_template, make_response, send_from_directory, request
 
 app = Flask(__name__)
 
@@ -15,6 +15,7 @@ app = Flask(__name__)
 @app.route("/obfuscate-page")
 def template_test():
     return render_template('smart-select-image.html', my_string="Wheeeee!")
+
 
 @app.route("/deobfuscate-page")
 def deobfuscate_page():

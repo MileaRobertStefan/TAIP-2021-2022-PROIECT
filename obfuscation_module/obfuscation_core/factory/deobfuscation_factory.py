@@ -1,12 +1,12 @@
 from key.key_types.zone_key import ZoneKey
-from obfuscation_core.deobfusators.affine_deobfuscator import AffineDeObfuscator
-from obfuscation_core.deobfusators.blur_deobfuscator import BlurDeObfuscator
-from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
 from obfuscation_core.deobfusators.XOR_deobfuscator import XORDeObfuscator
-from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
-from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
-from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
+from obfuscation_core.deobfusators.affine_deobfuscator import AffineDeObfuscator
 from obfuscation_core.deobfusators.color_deobfuscator import ColorDeObfuscator
+from obfuscation_core.deobfusators.deobfuscator import DeObfuscator
+from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeObfuscator
+from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
+from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
+
 
 class DeobfuscationFactory:
 
@@ -17,7 +17,6 @@ class DeobfuscationFactory:
         deobfuscator = None
         starting_deobuscator = None
         switcher = {
-            1: BlurDeObfuscator,
             25: XORDeObfuscator,
             50: ScrambleDeObfuscator,
             75: AffineDeObfuscator,
