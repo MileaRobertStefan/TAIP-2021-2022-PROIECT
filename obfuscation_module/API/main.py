@@ -7,14 +7,22 @@ from backend.obfuscator import Obfuscastor
 
 app = Flask("PROIECT TAIP")
 
-from flask import Flask, render_template, make_response, send_from_directory
+from flask import Flask, render_template, make_response, send_from_directory ,request
 
 app = Flask(__name__)
 
 
 @app.route("/obfuscate-page")
 def template_test():
-    return render_template('smart-select-image.html', my_string="Wheeeee!", my_list=[0, 1, 2, 3, 4, 5])
+    return render_template('smart-select-image.html', my_string="Wheeeee!")
+
+@app.route("/deobfuscate-page")
+def deobfuscate_page():
+    image_name = request.args.get('image-name')
+    if image_name != None:
+        return render_template('view-obfuscated-image.html', img_name=image_name)
+    else:
+        return None
 
 
 @app.route('/style.css')

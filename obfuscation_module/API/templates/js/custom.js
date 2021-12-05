@@ -138,8 +138,9 @@ var load_rect = (event) => {
         rect.setAttributeNS(null, 'y', y);
         return rect;
     }
+};
 
-    function addInputZone() {
+function addInputZone() {
         let el = document.createElement('html');
         el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
                             "<div style='display: inline'>" +
@@ -163,8 +164,19 @@ var load_rect = (event) => {
                             "</div>"+
                         "</div>";
         document.getElementById("input-zones").appendChild(el)
-    }
-};
+}
+
+function addDeobfuscationInputZone(){
+    $('#submit-input-zones').css("display", "inline");
+    let el = document.createElement('html');
+    el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
+                        "<input class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
+                    "</div>";
+    document.getElementById("input-zones").appendChild(el)
+}
+
+function sendToDeofuscationApi(){
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -246,7 +258,7 @@ function copy(i) {
 
 function showObfuscateLink(img_name) {
     $("#link-to-obfuscate-pic")
-        .attr("href", "/images/" + img_name.toString() + ".png")
+        .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")
         .html("Click here to go to the obfuscated picture")
 }
