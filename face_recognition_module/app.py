@@ -2,13 +2,14 @@ import json
 import os
 import random
 from flask import Flask, request
+from flask_cors import CORS
 
 from core.utils import save_image
 from services.face_detection_service import FaceDetectionService
 from services.face_recognition_service import FaceRecognitionService
 
 app = Flask(__name__)
-
+CORS(app)
 
 def get_random_filename():
     return str(random.randint(0, 10000000))
@@ -45,4 +46,4 @@ def recognition():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5001)

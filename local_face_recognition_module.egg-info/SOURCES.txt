@@ -1,0 +1,10 @@
+setup.cfg
+setup.py
+face_recognition_module/app.py
+face_recognition_module/face-recognition.py
+face_recognition_module/test_detection.py
+face_recognition_module/test_recognition.py
+local_face_recognition_module.egg-info/PKG-INFO
+local_face_recognition_module.egg-info/SOURCES.txt
+local_face_recognition_module.egg-info/dependency_links.txt
+local_face_recognition_module.egg-info/top_level.txt
