@@ -139,7 +139,7 @@ var load_rect = (event) => {
         return rect;
     }
 
-    function addInputZone(){
+    function addInputZone() {
         let el = document.createElement('html');
         el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
                             "<div style='display: inline'>" +
@@ -158,7 +158,7 @@ var load_rect = (event) => {
                             "<div class='generated-key'>"+
                                 "Zone "+ rectangles.length +" Key"+
                             "</div>"+
-                            "<div class='copy' onclick='copy(rectangles.length)'>" +
+                            "<div class='copy' onclick='copy(" + rectangles.length+ ")'>" +
                                 "Copy"+
                             "</div>"+
                         "</div>";
@@ -204,6 +204,12 @@ function postToServer(masterKey) {
             data: fd,
             contentType: false,
             processData: false,
+        }).done((data) => {
+            let i = 0
+            Object.keys(data).forEach((key) => {
+                $('.generated-key')[i].innerHTML = data[key]
+                i++;
+            })
         });
     }
 }
@@ -211,14 +217,14 @@ function postToServer(masterKey) {
 function submitRect() {
     let masterkey = {}
     masterkey.zones = []
-    let i= 0;
+    let i = 0;
     for (let coord of rectangles) {
-        i+=1
+        i += 1
         console.log(coord);
         let zone = {}
         zone['coordinates'] = [[(coord.y * image_height_ratio) | 0, (coord.x * image_width_ratio) | 0], [((coord.y + coord.height) * image_height_ratio) | 0, ((coord.x + coord.width) * image_width_ratio) | 0]];
         let layers = []
-        id = document.getElementById("input-zone-"+i).getElementsByTagName("select")[0].value
+        id = document.getElementById("input-zone-" + i).getElementsByTagName("select")[0].value
         let layer = {'alg_id': id, 'key_data': {'key': "parola123"}}
 
         layers.push(layer);
@@ -228,4 +234,9 @@ function submitRect() {
 
 
     postToServer(JSON.stringify(masterkey));
+}
+
+function copy(i){
+    copyText = $('.generated-key')[i-1]
+    navigator.clipboard.writeText(copyText.innerHTML);
 }

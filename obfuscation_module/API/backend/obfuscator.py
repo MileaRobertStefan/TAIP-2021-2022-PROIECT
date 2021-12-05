@@ -11,8 +11,7 @@ from API.backend.Comm.export import *
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
 import numpy as np
 
-from cv2 import cv2 as cv
-
+import cv2
 of = ObfuscationFactory()
 
 
@@ -41,7 +40,7 @@ class Obfuscastor:
             ob: Obfuscator = of.create_obfuscation(commands)
             chain_of_commands.append((ob, z.coordinates))
 
-        img = cv.imdecode(np.fromstring(photo.read(), np.uint8), cv.IMREAD_COLOR)
+        img = cv2.imdecode(np.fromstring(photo.read(), np.uint8), cv2.IMREAD_COLOR)
         print(chain_of_commands)
         masterKey  = MasterKey([])
 
@@ -54,12 +53,11 @@ class Obfuscastor:
             img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]] = img2
             masterKey.zones.append(kb.build())
 
-        cv.imshow("Poza mea!", img)
+        cv2.imshow("Poza mea!", img)
 
-        cv.waitKey(0)
+        cv2.waitKey(0)
 
-        return json.dumps({"masterKey": masterKey.to_string()})
-        pass
+        return masterKey.encodedZoneKeys()
 
     def __init__(self):
         pass
