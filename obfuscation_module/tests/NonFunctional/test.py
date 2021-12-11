@@ -29,7 +29,7 @@ def stress_test(stress, test_url):
             else:
                 m += data
 
-            return m
+            return m // stress
 
 
 url = 'http://127.0.0.1:5000/deobfuscate-page?image-name=71266911.png'
@@ -37,7 +37,7 @@ url = 'http://127.0.0.1:5000/deobfuscate-page?image-name=71266911.png'
 if __name__ == "__main__":
     rez = []
     for i in range(500, 2000, 100):
-        print("sress lvl = ", i)
+        print("stress lvl = ", i)
         rez.append([i, stress_test(i,url)])
 
     print(rez)

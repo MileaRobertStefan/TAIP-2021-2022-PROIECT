@@ -14,6 +14,7 @@ from obfuscation_core.obfuscators.obfuscator import Obfuscator
 
 of = ObfuscationFactory()
 
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 class Obfuscastor:
     @staticmethod
@@ -52,8 +53,6 @@ class Obfuscastor:
             img[coord[0][0]:coord[1][0], coord[0][1]:coord[1][1]] = img2
             masterKey.zones.append(kb.build())
 
-        __location__ = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname(__file__)))
         random_name = str(int(random() * 100000000))
         cv2.imwrite(__location__ + "/images/" + random_name + ".png", img)
 
