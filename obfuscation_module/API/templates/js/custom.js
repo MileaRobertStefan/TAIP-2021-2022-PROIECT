@@ -1,25 +1,23 @@
-var rectangles = [];
-let img_id;
-var zones = [];
-var image_width, image_height;
-var image_width_ratio, image_height_ratio;
-var load_rect = (event) => {
+
+const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
+let rectangles = [];
+let zones = []
+let image_width, image_height;
+let image_width_ratio, image_height_ratio;
+let load_rect = (event) => {
     const $ = document.querySelector.bind(document);
 
     /**
      * Collection of rectangles defining user generated regions
      */
 
-    rectangles = []
-    redraw()
-    document.getElementById("input-zones").innerHTML = ''
+    rectangles = [];
+    redrawRectangles();
+    document.getElementById("input-zones").innerHTML = '';
 
     // DOM elements
     const $screenshot = $('#screenshot');
-    const $draw = $('#draw');
     const $marquee = $('#marquee');
-    const $boxes = $('#boxes');
-    const $boxesText = $('#boxesText');
 
     document.getElementById("draw").setAttribute("width", $screenshot.width)
     document.getElementById("draw").setAttribute("height", $screenshot.height)
@@ -50,7 +48,7 @@ var load_rect = (event) => {
             const rect = hitTest(ev.layerX, ev.layerY);
             if (rect) {
                 rectangles.splice(rectangles.indexOf(rect), 1);
-                redraw();
+                redrawRectangles();
             }
             return;
         }
@@ -67,7 +65,7 @@ var load_rect = (event) => {
         $screenshot.removeEventListener('pointermove', moveDrag);
         if (ev.target === $screenshot && marqueeRect.width && marqueeRect.height && !hitTest(ev.layerX, ev.layerY)) {
             rectangles.push(Object.assign({}, marqueeRect));
-            redraw();
+            redrawRectangles();
             addInputZone()
         }
     }
@@ -86,7 +84,7 @@ var load_rect = (event) => {
             y -= height;
         }
         Object.assign(marqueeRect, {x, y, width, height});
-        drawRect($marquee, marqueeRect);
+        drawRectangle($marquee, marqueeRect);
     }
 
     function hitTest(x, y) {
@@ -97,86 +95,77 @@ var load_rect = (event) => {
             y <= rect.y + rect.height
         ));
     }
-
-    function redraw() {
-        boxes.innerHTML = '';
-        boxesTexts.innerHTML = '';
-        let i = 0
-        rectangles.forEach((data) => {
-            i += 1
-            boxes.appendChild(drawRect(
-                document.createElementNS("http://www.w3.org/2000/svg", 'rect'), data
-            ));
-            appendTextToRect(data, i)
-        });
-    }
-
-    function appendTextToRect(data, i) {
-        fontSize = 30
-        font = fontSize + "px times new roman";
-
-        canvas = document.createElement("canvas");
-        context = canvas.getContext("2d");
-        context.font = font;
-        width = context.measureText(i).width;
-
-        var svgNS = "http://www.w3.org/2000/svg";
-        var newText = document.createElementNS(svgNS, "text");
-        newText.setAttributeNS(null, "x", (data.x + data.width / 2) - (width / 2));
-        newText.setAttributeNS(null, "y", (data.y + data.height / 2) + 16 / 2);
-        newText.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
-
-        var textNode = document.createTextNode(i);
-        newText.appendChild(textNode);
-        boxesTexts.appendChild(newText);
-    }
-
-    function drawRect(rect, data) {
-        const {x, y, width, height} = data;
-        rect.setAttributeNS(null, 'width', width);
-        rect.setAttributeNS(null, 'height', height);
-        rect.setAttributeNS(null, 'x', x);
-        rect.setAttributeNS(null, 'y', y);
-        return rect;
-    }
 };
 
 function addInputZone() {
-        let el = document.createElement('html');
-        el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
-                            "<div style='display: inline'>" +
-                                "<span class='custom-dropdown'>"+
-                                    "<select class='fancy-selector'>" +
-                                          "<option value='1'>Affine</option>" +
-                                          "<option value='2'>Encryption</option>" +
-                                          "<option value='3'>Scramble</option>" +
-                                          "<option value='4'>Color</option>" +
-                                          "<option value='5'>Puzzle</option>" +
-                                          "<option value='6'>Blur</option>" +
-                                          "<option value='7'>XOR</option>" +
-                                    "</select>" +
-                                "</span>"+
-                            "</div> " +
-                            "<div class='generated-key'>"+
-                                "Zone "+ rectangles.length +" Key"+
-                            "</div>"+
-                            "<div class='copy' onclick='copy(" + rectangles.length+ ")'>" +
-                                "Copy"+
-                            "</div>"+
-                        "</div>";
-        document.getElementById("input-zones").appendChild(el)
+        const container = document.createElement('obfuscator-input-container');
+        container.setAttribute("id", "input-zone-" + rectangles.length);
+
+        container.appendChild(getObfuscatorInput());
+        container.appendChild(getGeneratedKeyField());
+        container.appendChild(getCopyButton());
+
+        document.getElementById("input-zones").appendChild(container);
+}
+
+function getCopyButton(){
+    const button = document.createElement("div");
+    button.setAttribute("class", "copy");
+    button.addEventListener("click", ()=>{copy(rectangles.length);});
+    button.innerText = "Copy";
+    return button;
+}
+
+function getGeneratedKeyField(){
+    const div = document.createElement("div");
+    div.setAttribute("class", "generated-key");
+    div.innerText = "Zone " + rectangles.length + " Key";
+    return div;
+}
+
+function getObfuscatorInput(){
+        const selectWrapper = document.createElement('div');
+
+        const customDropdown = document.createElement("span");
+        customDropdown.setAttribute("class", "custom-dropdown");
+
+        selectWrapper.append(customDropdown);
+        customDropdown.appendChild(getObfuscatorsSelector());
+
+        return selectWrapper;
+}
+
+function getObfuscatorsSelector(){
+    const selectElement = document.createElement("select");
+    selectElement.setAttribute("class", "fancy-selector");
+
+    for (let i=0; i<obfuscatorsOptionsList.length; i++){
+        const option = document.createElement("option");
+        option.setAttribute("value", i.toString());
+        option.innerText = obfuscatorsOptionsList[i];
+        selectElement.appendChild(option);
+    }
+
+    return selectElement;
 }
 
 var kk = 0;
-
 function addDeobfuscationInputZone(text = '') {
     $('#submit-input-zones').css("display", "inline");
-    let el = document.createElement('html');
-    el.innerHTML = "<div style ='display: flex; align-items: center'>" +
-        "<input id='input-zone-" + kk + "' class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;' value='" + text + "'/>" +
-        "</div>";
+    const container = document.createElement('deobfuscator-input-container');
+
+    const inputZone = document.createElement("div");
+
+    const input = document.createElement("input");
+    input.setAttribute("class", "generated-key");
+    input.setAttribute("id", "input-zone-"+kk);
+    input.setAttribute("value", text)
+
+    inputZone.appendChild(input)
+    container.appendChild(inputZone);
+
+    document.getElementById("input-zones").appendChild(container)
     kk++;
-    document.getElementById("input-zones").appendChild(el)
 }
 
 
@@ -218,7 +207,6 @@ function readTextFile(input) {
 
         reader.readAsText(input.files[0]);
     }
-
 }
 
 var global_master_key
@@ -296,7 +284,6 @@ function getKeysFromInputZones() {
 
 function postToServerForFaceDetection() {
     var fd = new FormData();
-    console.log($('#file'));
     var files = $('#file')[0].files;
 
     // Check file selected or not
@@ -340,24 +327,22 @@ function submitRect() {
     postToServer(JSON.stringify(masterkey));
 }
 
-const appendTextToRectangle = (boxesTexts, rectangle, text) => {
+const appendTextToRectangle = (rectangle, text) => {
     const font = "30px times new roman";
     const canvas = document.createElement("canvas");
     const canvasContext = canvas.getContext("2d");
     const textWidth = canvasContext.measureText(text).width;
 
     canvasContext.font = font;
-
     const svgNS = "http://www.w3.org/2000/svg";
     const textContainer = document.createElementNS(svgNS, "text");
 
     textContainer.setAttributeNS(null, "x", (rectangle.x + rectangle.width / 2) - (textWidth / 2));
     textContainer.setAttributeNS(null, "y", (rectangle.y + rectangle.height / 2) + 16 / 2);
-    textContainer.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
 
     const textNode = document.createTextNode(text);
     textContainer.appendChild(textNode);
-    boxesTexts.appendChild(textContainer);
+    document.querySelector("#boxesTexts").appendChild(textContainer);
 };
 
 const drawRectangle = (rectangleContainer, rectangleData) => {
@@ -371,16 +356,14 @@ const drawRectangle = (rectangleContainer, rectangleData) => {
 
 const redrawRectangles = () => {
     const boxes = document.getElementById("boxes");
-    const boxesText = document.getElementById("boxesText");
 
     boxes.innerHTML = "";
-    boxesTexts.innerHTML = "";
 
     rectangles.forEach((rectangle, idx) => {
         boxes.appendChild(drawRectangle(
             document.createElementNS("http://www.w3.org/2000/svg", 'rect'), rectangle
         ));
-        appendTextToRectangle(boxesTexts, rectangle, idx + 1);
+        appendTextToRectangle(rectangle, idx + 1);
     });
 };
 
@@ -389,11 +372,7 @@ function faceDetection() {
 }
 
 function processDetectedFaces(coordinates) {
-    console.log("obfuscating faces...");
     for (let coords of coordinates) {
-        console.log("for coordinate...");
-//         if (!hitTest(coords.top, coords.right)) {
-        console.log(coords);
         rectangles.push({
             x: coords.left / image_width_ratio,
             y: coords.top / image_height_ratio,
@@ -402,7 +381,6 @@ function processDetectedFaces(coordinates) {
         });
         redrawRectangles();
         addInputZone();
-//        }
     }
 }
 
@@ -412,7 +390,6 @@ function copy(i) {
 }
 
 function showObfuscateLink(img_name) {
-
     $("#link-to-obfuscate-pic")
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")

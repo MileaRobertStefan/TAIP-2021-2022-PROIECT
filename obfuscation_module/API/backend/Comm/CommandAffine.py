@@ -3,7 +3,7 @@ from  obfuscation_core.obfuscators.affine_obfuscator import AffineObfuscator
 
 
 class CommandAffine(Command):
-    id = 1
+    id = 0
 
     def __init__(self):
         self.key: str = ""

@@ -84,10 +84,10 @@ def deobfuscate():
         image_id = request.form["image_id"]
         zones = request.form["zones"]
 
-        img = Deobfuscator.post(image_id,zones)
+        img = Deobfuscator.post(image_id, zones)
 
         response = make_response(img.tobytes())
-        return  response
+        return response
 
 
 
