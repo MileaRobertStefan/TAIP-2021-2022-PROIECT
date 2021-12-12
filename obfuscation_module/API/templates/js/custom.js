@@ -1,4 +1,4 @@
-let img_id = 0 ;
+let img_id = 0;
 const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
 let rectangles = [];
 let zones = []
@@ -102,11 +102,29 @@ function addInputZone() {
     container.setAttribute("id", "input-zone-" + rectangles.length);
     container.setAttribute("class", "cull-center")
 
+    container.appendChild(getCheckbox())
     container.appendChild(getObfuscatorInput());
     container.appendChild(getGeneratedKeyField());
     container.appendChild(getCopyButton());
 
     document.getElementById("input-zones").appendChild(container);
+}
+
+function getCheckbox() {
+    const label = document.createElement("label")
+    label.setAttribute("class", "container")
+
+    const inputBox = document.createElement('input');
+    inputBox.setAttribute("type", "checkbox")
+    inputBox.setAttribute("checked", "checked")
+    inputBox.setAttribute("id", "checkbox-zone-" + rectangles.length);
+
+    const span = document.createElement("span")
+    span.setAttribute("class", "checkmark")
+
+    label.appendChild(inputBox)
+    label.appendChild(span)
+    return label
 }
 
 function getCopyButton() {
@@ -151,6 +169,7 @@ function getObfuscatorsSelector() {
 }
 
 var kk = 0;
+
 function addDeobfuscationInputZone(text = '') {
     $('#submit-input-zones').css("display", "inline");
     const container = document.createElement('deobfuscator-input-container');
@@ -198,6 +217,8 @@ function readTextFile(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
+            document.getElementById("input-zones").innerHTML = ''
+            kk = 0
             let local_master_key = JSON.parse(e.target.result)
             Object.keys(local_master_key.zone_keys).forEach((key) => {
                 addDeobfuscationInputZone(local_master_key.zone_keys[key]);
@@ -402,7 +423,14 @@ function showObfuscateLink(img_name) {
 }
 
 function saveStaticDataToFile() {
-    var blob = new Blob([JSON.stringify(global_master_key)],
+    let local_master_key = JSON.parse(JSON.stringify(global_master_key));
+    for (const zone in local_master_key['zone_keys']) {
+        let id = zone.replace("zone_", "")
+        if (!document.getElementById("checkbox-zone-" + id).checked) {
+            delete local_master_key['zone_keys'][zone]
+        }
+    }
+    var blob = new Blob([JSON.stringify(local_master_key)],
         {type: "text/plain;charset=utf-8"});
     saveAs(blob, "exportKeys.txt");
 }
