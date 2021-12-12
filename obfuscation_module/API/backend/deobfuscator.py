@@ -7,13 +7,12 @@ import os
 from key.key_types.zone_key import ZoneKey
 from obfuscation_core.factory.deobfuscation_factory import DeobfuscationFactory
 
-from cv2 import  cv2
+import cv2
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
 class Deobfuscator:
-
     @staticmethod
     def parse_key(key: str) -> ZoneKey:
         unpickled = codecs.decode(key.encode(), "base64")
@@ -46,12 +45,12 @@ class Deobfuscator:
 
 
 
-            cv2.imshow("deobfuscata",img)
-            cv2.waitKey(0)
 
             print("deobfuscator stop")
             retval, buffer = cv2.imencode('.png', img)
-            return  buffer
+            import base64
+            encoded_string = base64.b64encode(buffer)
+            return encoded_string
         except Exception as e:
             print(e)
 

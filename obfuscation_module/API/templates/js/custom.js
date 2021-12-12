@@ -166,17 +166,17 @@ function addInputZone() {
         document.getElementById("input-zones").appendChild(el)
 }
 
+var kk = 0;
 function addDeobfuscationInputZone(){
     $('#submit-input-zones').css("display", "inline");
     let el = document.createElement('html');
-    el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
-                        "<input class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
+    el.innerHTML = "<div style ='display: flex; align-items: center'>" +
+                        "<input id='input-zone-"+kk+"' class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
                     "</div>";
+    kk++;
     document.getElementById("input-zones").appendChild(el)
 }
 
-function sendToDeofuscationApi(){
-}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -227,6 +227,42 @@ function postToServer(masterKey) {
         });
     }
 }
+
+function sendToDeofuscationApi(){
+        var fd = new FormData();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const image_id = urlParams.get('image-name').replace(".png", "")
+        fd.append('image_id', image_id);
+        fd.append("zones", getKeysFromInputZones());
+        $.ajax({
+            url: 'deobfuscate',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done((data) => {
+             $("#screenshot2")
+                    .attr('src', "data:image/png;base64," + data)
+        });
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function getKeysFromInputZones(){
+    master_key = {}
+    for(let i = 0; i<kk; i++){
+        let text = document.getElementById("input-zone-"+i).value;
+        if(text !== '')
+            master_key["zone_"+i] = text
+    }
+
+    master_key =  replaceAll(JSON.stringify(master_key),"\\\\\\\\","\\")
+    return master_key;
+}
+
 
 function postToServerForFaceDetection() {
     var fd = new FormData();

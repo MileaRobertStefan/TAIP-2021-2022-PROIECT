@@ -57,12 +57,17 @@ def obfuscate():
     return res
 
 
-@app.route("/deobfuscate")
+@app.route("/deobfuscate", methods=["GET", "POST"])
 def deobfuscate():
 
     if request.method == "POST":
-        photos = request.files['photo']
-        zones = json.loads(request.form['zones'])
+        image_id = request.form["image_id"]
+        zones = request.form["zones"]
+
+        img = Deobfuscator.post(image_id, zones)
+
+        response = make_response(img)
+        return response
 
     if request.method == "GET":
         image_id = request.form["image_id"]
