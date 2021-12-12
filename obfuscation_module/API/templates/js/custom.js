@@ -1,4 +1,4 @@
-
+let img_id = 0 ;
 const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
 let rectangles = [];
 let zones = []
