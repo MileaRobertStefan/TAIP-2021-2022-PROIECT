@@ -20,10 +20,15 @@ def template_test():
 @app.route("/deobfuscate-page")
 def deobfuscate_page():
     image_name = request.args.get('image-name')
-    if image_name != None:
-        return render_template('view-obfuscated-image.html', img_name=image_name)
+
+    if image_name:
+        s = "src=/images/" + image_name + ""
+        t = render_template('view-obfuscated-image.html', img_name=s)
     else:
-        return None
+        t = render_template('view-obfuscated-image.html', img_name="")
+
+    return t
+
 
 
 @app.route('/style.css')
@@ -36,6 +41,12 @@ def css():
 @app.route('/custom.js')
 def js():
     resp = make_response(render_template("js/custom.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
+@app.route('/FileSaver.js')
+def FileSaver():
+    resp = make_response(render_template("js/FileSaver.js"))
     resp.headers['Content-type'] = 'text/javascript'
     return resp
 
@@ -57,21 +68,26 @@ def obfuscate():
     return res
 
 
-@app.route("/deobfuscate")
+@app.route("/deobfuscate", methods=["GET", "POST"])
 def deobfuscate():
 
     if request.method == "POST":
-        photos = request.files['photo']
-        zones = json.loads(request.form['zones'])
+        image_id = request.form["image_id"]
+        zones = request.form["zones"]
+
+        img = Deobfuscator.post(image_id, zones)
+
+        response = make_response(img)
+        return response
 
     if request.method == "GET":
         image_id = request.form["image_id"]
         zones = request.form["zones"]
 
-        img = Deobfuscator.post(image_id,zones)
+        img = Deobfuscator.post(image_id, zones)
 
         response = make_response(img.tobytes())
-        return  response
+        return response
 
 
 

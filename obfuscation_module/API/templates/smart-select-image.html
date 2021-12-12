@@ -11,6 +11,7 @@
   
   <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
   <script src="{{ url_for('js') }}"></script>
+  <script src="{{ url_for('FileSaver') }}"></script>
 </head>
 
 <body>
@@ -62,7 +63,10 @@
       <div class="main-footer">
         <div id="input-zones"></div>
 
-        <a class="button" style="display: none" id="link-to-obfuscate-pic"></a>
+        <div class="main-footer__buttons">
+          <a class="button" style="display: none" id="link-to-obfuscate-pic"></a>
+          <button id="export-keys" class="button" style="display: none" onclick="saveStaticDataToFile()">Export Keys</button>
+        </div>
       </div>
     </div>
   </main>

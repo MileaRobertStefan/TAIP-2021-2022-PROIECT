@@ -152,10 +152,23 @@ main .main__main-content .main-footer {
   font-weight: 500;
 }
 
-obfuscator-input-container {
+.cull-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+#link-to-obfuscate-pic {
+  background: var(--custom-dark-blue);
+  font-weight: 600;
+}
+
+main .main__main-content .main-footer .main-footer__buttons {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin: 1em 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -321,12 +334,6 @@ obfuscator-input-container {
 
 .copy:hover {
   opacity: 0.9;
-}
-
-#link-to-obfuscate-pic {
-  margin: 1em 0;
-  font-weight: 600;
-  background: var(--custom-dark-blue);
 }
 
 #boxesTexts text {
