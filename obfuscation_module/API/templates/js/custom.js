@@ -224,6 +224,13 @@ function readURL(input) {
                     // .attr("height" , this.height)
                     .attr('onload', load_rect)
             };
+
+            const mainTag = document.getElementsByTagName("main")[0];
+            const hasPictureClass = mainTag.classList.contains("main--has-picture");
+
+            if (!hasPictureClass) {
+                mainTag.classList.add("main--has-picture");
+            }
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -376,6 +383,6 @@ function copy(i) {
 function showObfuscateLink(img_name) {
     $("#link-to-obfuscate-pic")
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
-        .css("display", "inline")
+        .css("display", "inline-block")
         .html("Click here to go to the obfuscated picture")
 }

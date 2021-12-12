@@ -1,51 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
-    <script src="{{ url_for('js') }}"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Obfuscator</title>
 
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
+  <script src="{{ url_for('js') }}"></script>
 </head>
+
 <body>
-<div class="center-div" style="flex-direction: column;
-    align-content: center;
-    align-items: center;">
-    <h1>Welcome to our app!</h1>
-    <h2>Insert a picture and select the parts you want to obfuscate</h2>
-    <div class="button-34">
-        <label for="file">Browse...</label>
-        <input type='file' id='file' name='file' onchange="readURL(this);"/>
+  <header>
+    <h1>Photo Obfuscator</h1>
+
+    <div class="header__description">
+      <p>The solution for storing potentially confidential photos without invoking GDPR issues.</p>
+      <p>Upload an image and the algorithm will obfuscate the faces detected in the photo.</p>
+      <p>You can also manually select multiple areas to obfuscate and change the obfuscating method.</p>
     </div>
-</div>
-<br>
+  </header>
 
-<div class="center-div" style="height: 50vh">
-    <img style="height: 50vh" id="screenshot"
-         draggable="false">
-    <svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-        <rect id="marquee" x="0" y="0" width="0" height="0"/>
-        <g id="boxes"></g>
-        <g id="boxesTexts"></g>
-    </svg>
-    <br>
+  <main>
+    <input type='file' id='file' name='file' onchange="readURL(this);"/>
 
-</div>
-<div class="center-div" style="flex-direction: column;
-    align-content: center;
-    align-items: center;">
-    <button onclick="faceDetection()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
-        Detect faces
-    </button>
-    <button onclick="submitRect()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
-        Submit
-    </button>
-    <div id="input-zones"></div>
-</div>
-<div class="center-div">
-    <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>
-</div>
+    <label for="file" class="main__main-content--no-picture">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 218.166 218.166">
+        <path d="M91.233 148.75h-83.3V17.85h166.6V83.3c0 2.192 1.774 3.967 3.967 3.967s3.967-1.774 3.967-3.967V13.883c0-2.192-1.774-3.967-3.967-3.967H3.967C1.774 9.917 0 11.691 0 13.883v138.833c0 2.192 1.774 3.967 3.967 3.967h87.267c2.192 0 3.967-1.774 3.967-3.967s-1.775-3.966-3.968-3.966zm0-15.867H23.8v-24.141L44.032 88.51l27.003 19.806a3.96 3.96 0 0 0 5.02-.271l42.316-38.633 17.234 24.125c1.271 1.782 3.75 2.196 5.532.922s2.196-3.75.922-5.532L122.226 61.16c-.658-.926-1.681-1.522-2.808-1.639a3.97 3.97 0 0 0-3.091 1.015l-43.219 39.46L45.981 80.1c-1.58-1.158-3.769-.992-5.152.395L23.8 97.524V33.717h134.867V83.3c0 2.192 1.774 3.967 3.967 3.967s3.967-1.774 3.967-3.967V29.75c0-2.192-1.774-3.967-3.967-3.967h-142.8c-2.192 0-3.967 1.774-3.967 3.967v107.1c0 2.192 1.774 3.967 3.967 3.967h71.4c2.192 0 3.967-1.774 3.967-3.967a3.97 3.97 0 0 0-3.968-3.967zm71.4-35.7c-30.621 0-55.533 24.912-55.533 55.533s24.912 55.533 55.533 55.533 55.533-24.912 55.533-55.533-24.911-55.533-55.533-55.533zm0 103.135c-26.248 0-47.6-21.352-47.6-47.6s21.352-47.6 47.6-47.6 47.6 21.352 47.6 47.6-21.351 47.6-47.6 47.6zm3.967-79.335h-7.933v27.767H130.9v7.933h27.767v27.768h7.933v-27.768h27.767v-7.933H166.6zM43.633 57.517c0 8.751 7.116 15.867 15.867 15.867s15.867-7.116 15.867-15.867S68.251 41.65 59.5 41.65s-15.867 7.116-15.867 15.867zm23.8 0c0 4.373-3.56 7.933-7.933 7.933s-7.933-3.56-7.933-7.933 3.56-7.933 7.933-7.933 7.933 3.56 7.933 7.933z"/>
+      </svg>
+
+      <p>Import a picture to get started...</p>
+    </label>
+
+    <div class="main__main-content">
+      <div class="picture-controls">
+        <label class="button" for="file">
+          Import another picture
+        </label>
+
+        <button class="button" onclick="faceDetection()">
+          Detect faces
+        </button>
+
+        <button class="button button__submit" onclick="submitRect()">
+          Submit
+        </button>
+      </div>
+
+      <div class="image-container">
+        <img style="height: 500px" id="screenshot" draggable="false" />
+        <svg height="500px" width="500px" id="draw" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <rect id="marquee" x="0" y="0" width="0" height="0"/>
+          <g id="boxes"></g>
+          <g id="boxesTexts"></g>
+        </svg>
+      </div>
+
+      <div class="main-footer">
+        <div id="input-zones"></div>
+
+        <a class="button" style="display: none" id="link-to-obfuscate-pic"></a>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
