@@ -6,7 +6,6 @@
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
-    <script src="{{ url_for('js') }}"></script>
 
 </head>
 <body>
@@ -17,7 +16,7 @@
     <h2>Insert a picture and select the parts you want to obfuscate</h2>
     <div class="button-34">
         <label for="file">Browse...</label>
-        <input type='file' id='file' name='file' onchange="readURL(this);"/>
+        <input type='file' id='file' name='file'/>
     </div>
 </div>
 <br>
@@ -36,10 +35,10 @@
 <div class="center-div" style="flex-direction: column;
     align-content: center;
     align-items: center;">
-    <button onclick="faceDetection()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
+    <button id="face-detect" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
         Detect faces
     </button>
-    <button onclick="submitRect()" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
+    <button id="submit-rect" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;" class="button-34">
         Submit
     </button>
     <div id="input-zones"></div>
@@ -47,5 +46,6 @@
 <div class="center-div">
     <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>
 </div>
+<script type="module" src="{{ url_for('js') }}"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 import json
 
-from flask import Flask, make_response, Response
+from flask import Flask, Response
 
-from backend.obfuscator import Obfuscastor
 from backend.deobfuscator import Deobfuscator
+from backend.obfuscator import Obfuscastor
 
 app = Flask("PROIECT TAIP")
 
@@ -33,11 +33,47 @@ def css():
     return resp
 
 
-@app.route('/custom.js')
+@app.route('/index.js')
 def js():
-    resp = make_response(render_template("js/custom.js"))
+    resp = make_response(render_template("js/index.js"))
     resp.headers['Content-type'] = 'text/javascript'
     return resp
+
+
+@app.route('/rectangles_drawer')
+def js_drawer():
+    resp = make_response(render_template("js/rectangles_drawer.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
+
+@app.route('/rectangle_drawer_utils')
+def js_drawer_utils():
+    resp = make_response(render_template("js/rectangle_drawer_utils.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
+
+@app.route('/faces_detector')
+def js_faces_detector():
+    resp = make_response(render_template("js/faces_detector.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
+
+@app.route('/obfuscation_utils')
+def js_obfuscation_utils():
+    resp = make_response(render_template("js/obfuscation_utils.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
+
+@app.route('/deobfuscation_utils')
+def js_deobfuscation_utils():
+    resp = make_response(render_template("js/deobfuscation_utils.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
 
 @app.route('/images/<path:path>')
 def send_js(path):
@@ -59,7 +95,6 @@ def obfuscate():
 
 @app.route("/deobfuscate")
 def deobfuscate():
-
     if request.method == "POST":
         photos = request.files['photo']
         zones = json.loads(request.form['zones'])
@@ -68,12 +103,10 @@ def deobfuscate():
         image_id = request.form["image_id"]
         zones = request.form["zones"]
 
-        img = Deobfuscator.post(image_id,zones)
+        img = Deobfuscator.post(image_id, zones)
 
         response = make_response(img.tobytes())
-        return  response
-
-
+        return response
 
     return "<p>Hello, World!</p>"
 
