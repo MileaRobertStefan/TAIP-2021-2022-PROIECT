@@ -7,8 +7,17 @@ from obfuscation_core.deobfusators.encryption_deobfuscator import EncryptionDeOb
 from obfuscation_core.deobfusators.puzzle_deobfuscator import PuzzleDeObfuscator
 from obfuscation_core.deobfusators.scramble_deofuscator import ScrambleDeObfuscator
 
+switcher = {
+    25: XORDeObfuscator,
+    50: ScrambleDeObfuscator,
+    75: AffineDeObfuscator,
+    100: ColorDeObfuscator,
+    125: PuzzleDeObfuscator,
+    150: EncryptionDeObfuscator
+}
 
 class DeobfuscationFactory:
+
 
     def __init__(self) -> None:
         pass
@@ -16,14 +25,7 @@ class DeobfuscationFactory:
     def create_deobfuscation(self, zone_key: ZoneKey) -> DeObfuscator:
         deobfuscator = None
         starting_deobuscator = None
-        switcher = {
-            25: XORDeObfuscator,
-            50: ScrambleDeObfuscator,
-            75: AffineDeObfuscator,
-            100: ColorDeObfuscator,
-            125: PuzzleDeObfuscator,
-            150: EncryptionDeObfuscator
-        }
+
         for layer in zone_key.layers[::-1]:
             if deobfuscator is None:
                 deobfuscator = switcher[layer.alg_id]()
@@ -34,4 +36,5 @@ class DeobfuscationFactory:
                 deobfuscator.next_deobfuscator = next_deobfuscator
                 deobfuscator = next_deobfuscator
                 deobfuscator.key_data = layer.key_data
+
         return starting_deobuscator

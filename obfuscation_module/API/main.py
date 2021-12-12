@@ -1,9 +1,9 @@
 import json
 
-from flask import Flask
-from flask import Response
+from flask import Flask, make_response, Response
 
 from backend.obfuscator import Obfuscastor
+from backend.deobfuscator import Deobfuscator
 
 app = Flask("PROIECT TAIP")
 
@@ -59,6 +59,22 @@ def obfuscate():
 
 @app.route("/deobfuscate")
 def deobfuscate():
+
+    if request.method == "POST":
+        photos = request.files['photo']
+        zones = json.loads(request.form['zones'])
+
+    if request.method == "GET":
+        image_id = request.form["image_id"]
+        zones = request.form["zones"]
+
+        img = Deobfuscator.post(image_id,zones)
+
+        response = make_response(img.tobytes())
+        return  response
+
+
+
     return "<p>Hello, World!</p>"
 
 

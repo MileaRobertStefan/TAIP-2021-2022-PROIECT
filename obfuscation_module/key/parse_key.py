@@ -14,7 +14,7 @@ class Parse_Key_Builder:
         unpickled = pickle.loads(codecs.decode(key.encode(), "base64"))
         return unpickled
 
-def parse_key(key: str) -> MasterKey:
+def parse_key(key: str) ->  MasterKey:
     unpickled = codecs.decode(key.encode(), "base64")
     unpickled = zlib.decompress(unpickled)
     unpickled = pickle.loads(unpickled)

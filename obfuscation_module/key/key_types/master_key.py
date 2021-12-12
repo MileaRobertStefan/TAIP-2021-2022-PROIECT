@@ -46,7 +46,7 @@ class MasterKey:
             pickled = codecs.encode(pickled, "base64").decode()
             to_ret["zone_" + str(i)] = pickled
             i += 1
-        return json.dumps(to_ret)
+        return to_ret
 
     def toJson(self):
         return json.dumps(self.to_string())

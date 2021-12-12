@@ -25,7 +25,7 @@ def stress_test(stress, test_url):
             else:
                 m += data
 
-            return m
+            return m // stress
 
 
 url = 'http://127.0.0.1:5000/deobfuscate-page?image-name=71266911.png'

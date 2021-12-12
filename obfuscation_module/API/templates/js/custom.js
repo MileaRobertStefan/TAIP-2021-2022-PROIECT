@@ -219,7 +219,6 @@ function postToServer(masterKey) {
         }).done((data) => {
             let i = 0
             data.image_id = JSON.parse(data.image_id)
-            data.zone_keys = JSON.parse(data.zone_keys)
             Object.keys(data.zone_keys).forEach((key) => {
                 $('.generated-key')[i].innerHTML = data.zone_keys[key]
                 i++;
