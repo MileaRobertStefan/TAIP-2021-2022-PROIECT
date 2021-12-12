@@ -1,4 +1,3 @@
-
 const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
 let rectangles = [];
 let zones = []
@@ -98,48 +97,49 @@ let load_rect = (event) => {
 };
 
 function addInputZone() {
-        const container = document.createElement('obfuscator-input-container');
-        container.setAttribute("id", "input-zone-" + rectangles.length);
+    const container = document.createElement('div');
+    container.setAttribute("id", "input-zone-" + rectangles.length);
+    container.setAttribute("class", "cull-center")
 
-        container.appendChild(getObfuscatorInput());
-        container.appendChild(getGeneratedKeyField());
-        container.appendChild(getCopyButton());
+    container.appendChild(getObfuscatorInput());
+    container.appendChild(getGeneratedKeyField());
+    container.appendChild(getCopyButton());
 
-        document.getElementById("input-zones").appendChild(container);
+    document.getElementById("input-zones").appendChild(container);
 }
 
-function getCopyButton(){
+function getCopyButton() {
     const button = document.createElement("div");
     button.setAttribute("class", "copy");
-    button.addEventListener("click", ()=>{copy(rectangles.length);});
+    button.addEventListener("click", () => {
+        copy(rectangles.length);
+    });
     button.innerText = "Copy";
     return button;
 }
 
-function getGeneratedKeyField(){
+function getGeneratedKeyField() {
     const div = document.createElement("div");
     div.setAttribute("class", "generated-key");
     div.innerText = "Zone " + rectangles.length + " Key";
     return div;
 }
 
-function getObfuscatorInput(){
-        const selectWrapper = document.createElement('div');
+function getObfuscatorInput() {
 
-        const customDropdown = document.createElement("span");
-        customDropdown.setAttribute("class", "custom-dropdown");
+    const customDropdown = document.createElement("span");
+    customDropdown.setAttribute("class", "custom-dropdown");
 
-        selectWrapper.append(customDropdown);
-        customDropdown.appendChild(getObfuscatorsSelector());
+    customDropdown.appendChild(getObfuscatorsSelector());
 
-        return selectWrapper;
+    return customDropdown;
 }
 
-function getObfuscatorsSelector(){
+function getObfuscatorsSelector() {
     const selectElement = document.createElement("select");
     selectElement.setAttribute("class", "fancy-selector");
 
-    for (let i=0; i<obfuscatorsOptionsList.length; i++){
+    for (let i = 0; i < obfuscatorsOptionsList.length; i++) {
         const option = document.createElement("option");
         option.setAttribute("value", i.toString());
         option.innerText = obfuscatorsOptionsList[i];
@@ -150,6 +150,7 @@ function getObfuscatorsSelector(){
 }
 
 var kk = 0;
+
 function addDeobfuscationInputZone(text = '') {
     $('#submit-input-zones').css("display", "inline");
     const container = document.createElement('deobfuscator-input-container');
@@ -158,7 +159,7 @@ function addDeobfuscationInputZone(text = '') {
 
     const input = document.createElement("input");
     input.setAttribute("class", "generated-key");
-    input.setAttribute("id", "input-zone-"+kk);
+    input.setAttribute("id", "input-zone-" + kk);
     input.setAttribute("value", text)
 
     inputZone.appendChild(input)
@@ -202,7 +203,7 @@ function readTextFile(input) {
                 addDeobfuscationInputZone(local_master_key.zone_keys[key]);
             })
             img_id = local_master_key.image_id
-            document.getElementById("screenshot").setAttribute("src","/images/" + local_master_key.image_id + ".png" )
+            document.getElementById("screenshot").setAttribute("src", "/images/" + local_master_key.image_id + ".png")
         }
 
         reader.readAsText(input.files[0]);
@@ -242,8 +243,8 @@ function postToServer(masterKey) {
 function sendToDeofuscationApi() {
     var fd = new FormData();
     var image_id;
-    if (img_id){
-         image_id = img_id
+    if (img_id) {
+        image_id = img_id
     } else {
         var urlParams = new URLSearchParams(window.location.search);
         image_id = urlParams.get('image-name').replace(".png", "")
@@ -306,6 +307,8 @@ function postToServerForFaceDetection() {
 }
 
 function submitRect() {
+    if (rectangles.length === 0)
+        return
     let masterkey = {}
     masterkey.zones = []
     let i = 0;
@@ -394,7 +397,7 @@ function showObfuscateLink(img_name) {
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")
         .html("Click here to go to the obfuscated picture")
-     $("#export-keys")
+    $("#export-keys")
         .css("display", "inline")
 }
 

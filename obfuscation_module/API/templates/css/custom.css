@@ -148,3 +148,8 @@
     user-select: none; /* Standard */
     cursor: pointer;
 }
+
+.cull-center{
+    display: flex;
+    align-items: center;
+}
