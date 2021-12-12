@@ -1,26 +1,23 @@
 
 const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
-var rectangles = [];
-var zones = []
-var image_width, image_height;
-var image_width_ratio, image_height_ratio;
-var load_rect = (event) => {
+let rectangles = [];
+let zones = []
+let image_width, image_height;
+let image_width_ratio, image_height_ratio;
+let load_rect = (event) => {
     const $ = document.querySelector.bind(document);
 
     /**
      * Collection of rectangles defining user generated regions
      */
 
-    rectangles = []
-    redraw()
-    document.getElementById("input-zones").innerHTML = ''
+    rectangles = [];
+    redrawRectangles();
+    document.getElementById("input-zones").innerHTML = '';
 
     // DOM elements
     const $screenshot = $('#screenshot');
-    const $draw = $('#draw');
     const $marquee = $('#marquee');
-    const $boxes = $('#boxes');
-    const $boxesText = $('#boxesText');
 
     document.getElementById("draw").setAttribute("width", $screenshot.width)
     document.getElementById("draw").setAttribute("height", $screenshot.height)
@@ -51,7 +48,7 @@ var load_rect = (event) => {
             const rect = hitTest(ev.layerX, ev.layerY);
             if (rect) {
                 rectangles.splice(rectangles.indexOf(rect), 1);
-                redraw();
+                redrawRectangles();
             }
             return;
         }
@@ -68,7 +65,7 @@ var load_rect = (event) => {
         $screenshot.removeEventListener('pointermove', moveDrag);
         if (ev.target === $screenshot && marqueeRect.width && marqueeRect.height && !hitTest(ev.layerX, ev.layerY)) {
             rectangles.push(Object.assign({}, marqueeRect));
-            redraw();
+            redrawRectangles();
             addInputZone()
         }
     }
@@ -87,7 +84,7 @@ var load_rect = (event) => {
             y -= height;
         }
         Object.assign(marqueeRect, {x, y, width, height});
-        drawRect($marquee, marqueeRect);
+        drawRectangle($marquee, marqueeRect);
     }
 
     function hitTest(x, y) {
@@ -97,48 +94,6 @@ var load_rect = (event) => {
             x <= rect.x + rect.width &&
             y <= rect.y + rect.height
         ));
-    }
-
-    function redraw() {
-        boxes.innerHTML = '';
-        boxesTexts.innerHTML = '';
-        let i = 0
-        rectangles.forEach((data) => {
-            i += 1
-            boxes.appendChild(drawRect(
-                document.createElementNS("http://www.w3.org/2000/svg", 'rect'), data
-            ));
-            appendTextToRect(data, i)
-        });
-    }
-
-    function appendTextToRect(data, i) {
-        fontSize = 30
-        font = fontSize + "px times new roman";
-
-        canvas = document.createElement("canvas");
-        context = canvas.getContext("2d");
-        context.font = font;
-        width = context.measureText(i).width;
-
-        var svgNS = "http://www.w3.org/2000/svg";
-        var newText = document.createElementNS(svgNS, "text");
-        newText.setAttributeNS(null, "x", (data.x + data.width / 2) - (width / 2));
-        newText.setAttributeNS(null, "y", (data.y + data.height / 2) + 16 / 2);
-        newText.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
-
-        var textNode = document.createTextNode(i);
-        newText.appendChild(textNode);
-        boxesTexts.appendChild(newText);
-    }
-
-    function drawRect(rect, data) {
-        const {x, y, width, height} = data;
-        rect.setAttributeNS(null, 'width', width);
-        rect.setAttributeNS(null, 'height', height);
-        rect.setAttributeNS(null, 'x', x);
-        rect.setAttributeNS(null, 'y', y);
-        return rect;
     }
 };
 
@@ -161,7 +116,6 @@ function getCopyButton(){
     return button;
 }
 
-
 function getGeneratedKeyField(){
     const div = document.createElement("div");
     div.setAttribute("class", "generated-key");
@@ -181,7 +135,6 @@ function getObfuscatorInput(){
         return selectWrapper;
 }
 
-
 function getObfuscatorsSelector(){
     const selectElement = document.createElement("select");
     selectElement.setAttribute("class", "fancy-selector");
@@ -192,16 +145,23 @@ function getObfuscatorsSelector(){
         option.innerText = obfuscatorsOptionsList[i];
         selectElement.appendChild(option);
     }
+
     return selectElement;
 }
 
 function addDeobfuscationInputZone(){
-    $('#submit-input-zones').css("display", "inline");
-    let el = document.createElement('html');
-    el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
-                        "<input class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
-                    "</div>";
-    document.getElementById("input-zones").appendChild(el)
+    const container = document.createElement('deobfuscator-input-container');
+
+    const inputZone = document.createElement("div");
+    inputZone.setAttribute("id", "input-zone-"+rectangles.length);
+
+    const input = document.createElement("input");
+    input.setAttribute("class", "generated-key");
+
+    container.appendChild(inputZone);
+    inputZone.appendChild(inputZone)
+
+    document.getElementById("input-zones").appendChild(container)
 }
 
 function sendToDeofuscationApi(){
@@ -220,8 +180,6 @@ function readURL(input) {
                 image_height = this.height;
                 $("#screenshot")
                     .attr('src', e.target.result)
-                    // .attr("width" , this.width)
-                    // .attr("height" , this.height)
                     .attr('onload', load_rect)
             };
 
@@ -266,7 +224,6 @@ function postToServer(masterKey) {
 
 function postToServerForFaceDetection() {
     var fd = new FormData();
-    console.log($('#file'));
     var files = $('#file')[0].files;
 
     // Check file selected or not
@@ -310,24 +267,20 @@ function submitRect() {
     postToServer(JSON.stringify(masterkey));
 }
 
-const appendTextToRectangle = (boxesTexts, rectangle, text) => {
-    const font = "30px times new roman";
+const appendTextToRectangle = (rectangle, text) => {
     const canvas = document.createElement("canvas");
     const canvasContext = canvas.getContext("2d");
     const textWidth = canvasContext.measureText(text).width;
 
-    canvasContext.font = font;
-
     const svgNS = "http://www.w3.org/2000/svg";
     const textContainer = document.createElementNS(svgNS, "text");
 
-    textContainer.setAttributeNS(null, "x", (rectangle.x + rectangle.width / 2) - (textWidth / 2));
+    textContainer.setAttributeNS(null, "x", ((rectangle.x + rectangle.width / 2) - (textWidth / 2)).toString());
     textContainer.setAttributeNS(null, "y", (rectangle.y + rectangle.height / 2) + 16 / 2);
-    textContainer.setAttributeNS(null, "style", "text-shadow : -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; " + "font:" + font);
 
     const textNode = document.createTextNode(text);
     textContainer.appendChild(textNode);
-    boxesTexts.appendChild(textContainer);
+    document.querySelector("#boxesTexts").appendChild(textContainer);
 };
 
 const drawRectangle = (rectangleContainer, rectangleData) => {
@@ -341,16 +294,14 @@ const drawRectangle = (rectangleContainer, rectangleData) => {
 
 const redrawRectangles = () => {
     const boxes = document.getElementById("boxes");
-    const boxesText = document.getElementById("boxesText");
 
     boxes.innerHTML = "";
-    boxesTexts.innerHTML = "";
 
     rectangles.forEach((rectangle, idx) => {
         boxes.appendChild(drawRectangle(
             document.createElementNS("http://www.w3.org/2000/svg", 'rect'), rectangle
         ));
-        appendTextToRectangle(boxesTexts, rectangle, idx + 1);
+        appendTextToRectangle(rectangle, idx + 1);
     });
 };
 
@@ -359,22 +310,18 @@ function faceDetection() {
 }
 
 function processDetectedFaces(coordinates) {
-    console.log("obfuscating faces...");
     for (let coords of coordinates) {
-         console.log("for coordinate...");
-//         if (!hitTest(coords.top, coords.right)) {
-            console.log(coords);
-            rectangles.push({
-                x: coords.left / image_width_ratio,
-                y: coords.top / image_height_ratio,
-                width: (coords.right - coords.left) / image_width_ratio,
-                height: (coords.bottom - coords.top) / image_height_ratio
-            });
-            redrawRectangles();
-            addInputZone();
-//        }
+        rectangles.push({
+            x: coords.left / image_width_ratio,
+            y: coords.top / image_height_ratio,
+            width: (coords.right - coords.left) / image_width_ratio,
+            height: (coords.bottom - coords.top) / image_height_ratio
+        });
+        redrawRectangles();
+        addInputZone();
     }
 }
+
 function copy(i) {
     copyText = $('.generated-key')[i - 1]
     navigator.clipboard.writeText(copyText.innerHTML);
