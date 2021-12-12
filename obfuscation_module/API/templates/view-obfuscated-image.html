@@ -11,16 +11,27 @@
 
 </head>
 <body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('myParam');
+
+    //console.log(myParam);
+
+</script>
+
 <div class="center-div">
     <div class="button-34">
         <label for="file">Import Keys...</label>
         <input type='file' id='file' name='file' onchange="readTextFile(this);"/>
     </div>
 </div>
+
+
 <div class="center-div" style="height: 50vh">
-    <img style="height: 50vh" id="screenshot" src="/images/{{ img_name }}"
-         draggable="false">
+    <img style="height: 50vh" id="screenshot" {{ img_name }} draggable="false">
 </div>
+
 <div class="center-div" style="flex-direction: column;
     align-content: center;
     align-items: center;">

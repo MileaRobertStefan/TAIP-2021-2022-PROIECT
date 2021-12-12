@@ -1,5 +1,6 @@
 var rectangles = [];
-var zones = []
+let img_id;
+var zones = [];
 var image_width, image_height;
 var image_width_ratio, image_height_ratio;
 var load_rect = (event) => {
@@ -211,10 +212,13 @@ function readTextFile(input) {
             Object.keys(local_master_key.zone_keys).forEach((key) => {
                 addDeobfuscationInputZone(local_master_key.zone_keys[key]);
             })
+            img_id = local_master_key.image_id
+            document.getElementById("screenshot").setAttribute("src","/images/" + local_master_key.image_id + ".png" )
         }
 
         reader.readAsText(input.files[0]);
     }
+
 }
 
 var global_master_key
@@ -249,9 +253,16 @@ function postToServer(masterKey) {
 
 function sendToDeofuscationApi() {
     var fd = new FormData();
+    var image_id;
+    if (img_id){
+         image_id = img_id
+    } else {
+        var urlParams = new URLSearchParams(window.location.search);
+        image_id = urlParams.get('image-name').replace(".png", "")
+        img_id = image_id
+    }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const image_id = urlParams.get('image-name').replace(".png", "")
+
     fd.append('image_id', image_id);
     fd.append("zones", getKeysFromInputZones());
     $.ajax({
@@ -401,6 +412,7 @@ function copy(i) {
 }
 
 function showObfuscateLink(img_name) {
+
     $("#link-to-obfuscate-pic")
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")

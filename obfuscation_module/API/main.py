@@ -20,10 +20,15 @@ def template_test():
 @app.route("/deobfuscate-page")
 def deobfuscate_page():
     image_name = request.args.get('image-name')
-    if image_name != None:
-        return render_template('view-obfuscated-image.html', img_name=image_name)
+
+    if image_name:
+        s = "src=\"/images/" + image_name+ "\""
+        t = render_template('view-obfuscated-image.html', poza=s)
     else:
-        return None
+        t = render_template('view-obfuscated-image.html', poza="")
+
+    return t
+
 
 
 @app.route('/style.css')
