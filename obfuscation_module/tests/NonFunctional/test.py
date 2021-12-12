@@ -1,19 +1,15 @@
-import requests
 import concurrent.futures
-import shutil
 import time
-import concurrent.futures
-import urllib.request
-import timeit
-import os
 
+import matplotlib.pyplot as plot
+import requests
 
 
 def load_url(url):
     start = time.time_ns()
-    rez = requests.get(url)
+    requests.get(url)
     end = time.time_ns()
-    return (end-start) // 1000
+    return (end - start) // 1000
 
 
 def stress_test(stress, test_url):
@@ -38,6 +34,10 @@ if __name__ == "__main__":
     rez = []
     for i in range(500, 2000, 100):
         print("sress lvl = ", i)
-        rez.append([i, stress_test(i,url)])
+        rez.append([i, stress_test(i, url)])
 
     print(rez)
+    x = [cv[0] for cv in rez]
+    y = [cv[1] for cv in rez]
+    plot.plot(x, y)
+    plot.show()
