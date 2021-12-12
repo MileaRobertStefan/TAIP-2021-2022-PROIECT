@@ -25,12 +25,31 @@ export const redrawRectangles = (rectangles) => {
 export function addInputZone(rectangles) {
         const container = document.createElement('obfuscator-input-container');
         container.setAttribute("id", "input-zone-" + rectangles.length);
+        container.setAttribute("class", "cull-center")
 
-        container.appendChild(getObfuscatorInput(rectangles));
+        container.appendChild(getCheckbox(rectangles))
+        container.appendChild(getObfuscatorInput());
         container.appendChild(getGeneratedKeyField(rectangles));
-        container.appendChild(getCopyButton());
+        container.appendChild(getCopyButton(rectangles));
 
         document.getElementById("input-zones").appendChild(container);
+}
+
+function getCheckbox(rectangles) {
+    const label = document.createElement("label")
+    label.setAttribute("class", "container")
+
+    const inputBox = document.createElement('input');
+    inputBox.setAttribute("type", "checkbox")
+    inputBox.setAttribute("checked", "checked")
+    inputBox.setAttribute("id", "checkbox-zone-" + rectangles.length);
+
+    const span = document.createElement("span")
+    span.setAttribute("class", "checkmark")
+
+    label.appendChild(inputBox)
+    label.appendChild(span)
+    return label
 }
 
 const appendTextToRectangle = (rectangle, text) => {

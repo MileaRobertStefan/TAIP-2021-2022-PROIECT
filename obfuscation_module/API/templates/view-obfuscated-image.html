@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Deobfuscator</title>
 
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
+  <script type="module" src="{{ url_for('js') }}"></script>
+  <script src="{{ url_for('FileSaver') }}"></script>
 </head>
+
 <body>
-<div class="center-div" style="height: 50vh">
-    <img style="height: 50vh" id="screenshot" src="/images/{{img_name}}"
-         draggable="false">
-</div>
-<div class="center-div" style="flex-direction: column;
-    align-content: center;
-    align-items: center;">
-    <button id="deobfuscation-input-container" style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
-            class="button-34">
-        Add key
-    </button>
-    <div id="input-zones"></div>
-    <button id='submit-input-zones' style="display: none; background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
-            class="button-34">
-        Submit
-    </button>
-</div>
-<div class="center-div">
-    <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>
-</div>
-<script type="module" src="{{ url_for('js') }}"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('myParam');
+  </script>
+
+  <header>
+    <h1>Photo Deobfuscator</h1>
+
+    <div class="header__description">
+      <p>Enter or import a set of keys to deobfuscate a picture modified by our algorithm.</p>
+    </div>
+  </header>
+
+  <main class="main--has-picture">
+    <input type='file' id='file' name='file'/>
+
+    <div class="main__main-content">
+      <div class="picture-controls">
+        <a class="button" href="/obfuscate-page">Go back to obfuscator</a>
+        <label class="button" for="file">Import keys</label>
+      </div>
+
+      <div class="image-container">
+        <img style="height: 500px" id="screenshot" {{ img_name }} draggable="false" />
+        <img style="height: 500px" id="screenshot2" />
+      </div>
+
+      <div class="main-footer">
+        <div id="input-zones"></div>
+
+        <div class="main-footer__buttons">
+          <button id="deobfuscation-input-container" class="button">
+            Add key
+          </button>
+          <button id='submit-input-zones' class="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

@@ -19,6 +19,12 @@ export function readURL(input) {
                         window.rectangleDrawer = new RectanglesDrawer(image_height, image_width)
                     })
             };
+            const mainTag = document.getElementsByTagName("main")[0];
+            const hasPictureClass = mainTag.classList.contains("main--has-picture");
+
+            if (!hasPictureClass) {
+                mainTag.classList.add("main--has-picture");
+            }
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -66,6 +72,7 @@ function postToServer(masterKey) {
             contentType: false,
             processData: false,
         }).done((data) => {
+            window.global_master_key = data;
             let i = 0
             data.image_id = JSON.parse(data.image_id)
             Object.keys(data.zone_keys).forEach((key) => {
@@ -82,4 +89,6 @@ function showObfuscateLink(img_name) {
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")
         .html("Click here to go to the obfuscated picture")
+    $("#export-keys")
+        .css("display", "inline")
 }

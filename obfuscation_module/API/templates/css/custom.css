@@ -1,150 +1,361 @@
-#screenshot {
-    position: absolute;
-    z-index: 1;
+:root {
+  color-scheme: light dark;
+  --custom-white: #f6f7f9;
+  --custom-white-hover: #eeeeee;
+  --custom-black: #212121;
+  --custom-light-gray: #e9eaec;
+  --custom-dark-blue: #0d47a1;
+  --gray-border: #bdbdbd;
+  --gray-background: #757575;
+  --darkgray-background: #424242;
+  --darkgray-hover: #404040;
+  --custom-darker-blue: #092a5e;
 
+  --body-background-color: var(--custom-light-gray);
+  --header-background-color: var(--custom-dark-blue);
+  --main-background-color: var(--custom-white);
+  --main-background-color-hover: var(--custom-white-hover);
+  --main-foreground-color: var(--custom-black);
+
+  --header-overlap: 4em;
+  --card-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+  --fonts: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonts);
+  background: var(--body-background-color);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background: var(--header-background-color);
+  color: var(--custom-white);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 3em calc(3em + var(--header-overlap)) 3em;
+  align-items: center;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 0.65em 0;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 2.5em;
+}
+
+header .header__description p {
+  margin: 0.15em 0;
+  font-weight: 300;
+}
+
+main {
+  background: var(--main-background-color);
+  box-shadow: var(--card-shadow);
+  color: var(--main-foreground-color);
+  width: 900px;
+  margin-top: calc(-1 * var(--header-overlap));
+  margin-bottom: 4em;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+main .main__main-content {
+  display: none;
+  width: 100%;
+}
+
+main .main__main-content--no-picture {
+  cursor: pointer;
+  width: 900px;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+main .main__main-content--no-picture:hover {
+  background: var(--main-background-color-hover);
+}
+
+main .main__main-content--no-picture svg {
+  width: 50px;
+  fill: var(--main-foreground-color);
+}
+
+main .main__main-content--no-picture p {
+  margin: 0;
+}
+
+main.main--has-picture .main__main-content--no-picture {
+  display: none;
+}
+
+main.main--has-picture .main__main-content {
+  display: block;
+}
+
+main .main__main-content .picture-controls {
+  background: var(--main-background-color-hover);
+  border-radius: 8px 8px 0 0;
+  width: 100%;
+  height: var(--header-overlap);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4em;
+}
+
+main .main__main-content .image-container {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  background: var(--gray-background);
+}
+
+main .main__main-content .main-footer {
+  padding: 1em;
+}
+
+.button {
+  cursor: pointer;
+  height: fit-content;
+  color: var(--custom-white);
+  background: var(--header-background-color);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 1em;
+  padding: 0.3em 1em;
+  border-radius: 16px;
+  border: none;
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button.button__submit {
+  background: var(--custom-dark-blue);
+  font-weight: 500;
+}
+
+.cull-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#link-to-obfuscate-pic,
+#submit-input-zones {
+  background: var(--custom-dark-blue);
+  font-weight: 600;
+}
+
+main .main__main-content .main-footer .main-footer__buttons {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-background-color: var(--custom-black);
+    --header-background-color: var(--custom-darker-blue);
+    --main-background-color: var(--darkgray-background);
+    --main-background-color-hover: var(--darkgray-hover);
+    --main-foreground-color: var(--custom-white);
+  }
+
+  main .main__main-content .picture-controls {
+    background: var(--darkgray-hover);
+  }
+}
+
+/***************************************************/
+
+#screenshot {
+  position: absolute;
+  z-index: 1;
+}
+
+#screenshot2 {
+  z-index: 3;
 }
 
 #draw {
-    position: absolute;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
 }
 
 #draw #boxes {
-    fill: blue;
-    stroke: white;
-    stroke-width: 1;
-    fill-opacity: 0.5;
-    stroke-opacity: 0.9;
+  fill: var(--custom-dark-blue);
+  stroke: var(--custom-white);
+  stroke-width: 1;
+  fill-opacity: 0.75;
+  stroke-opacity: 0.9;
 }
 
 #draw #marquee {
-    fill: white;
-    stroke: red;
-    stroke-width: 1;
-    stroke-dasharray: 5, 5;
-    stroke-opacity: 0.9;
-    fill-opacity: 0.2;
+  fill: white;
+  stroke: red;
+  stroke-width: 1;
+  stroke-dasharray: 5, 5;
+  stroke-opacity: 0.9;
+  fill-opacity: 0.2;
 }
 
 #draw #marquee.hide {
-    display: none;
+  display: none;
 }
 
 #file {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
 
-
 .button-34 {
-    background: #5E5DF0;
-    border-radius: 999px;
-    box-shadow: #5E5DF0 0 10px 20px -10px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    opacity: 1;
-    outline: 0 solid transparent;
-    padding: 8px 18px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: fit-content;
-    word-break: break-word;
-    border: 0;
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter, Helvetica, "Apple Color Emoji", "Segoe UI Emoji", NotoColorEmoji, "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
 }
 
 .center-div {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-dropdown {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 10px; /* demo only */
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
 }
 
 .custom-dropdown select {
-    background-color: #5E5DF0;
-    color: #fff;
-    font-size: inherit;
-    padding: .5em;
-    padding-right: 2.5em;
-    border: 0;
-    margin: 0;
-    border-radius: 3px;
-    text-indent: 0.01px;
-    text-overflow: '';
-    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  background-color: var(--header-background-color);
+  color: var(--custom-white);
+  width: 10em;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.3em 1em;
+  border: 0;
+  border-radius: 16px;
+  appearance: none;
+  outline: none;
 }
 
 .custom-dropdown::before,
 .custom-dropdown::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  pointer-events: none;
 }
 
 .custom-dropdown::after { /*  Custom dropdown arrow */
-    content: "\25BC";
-    height: 1em;
-    font-size: .625em;
-    line-height: 1;
-    right: 1.2em;
-    top: 50%;
-    margin-top: -.5em;
+  content: "\25BC";
+  color: var(--custom-white);
+  height: 1em;
+  font-size: .625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -.5em;
 }
 
 .custom-dropdown::before { /*  Custom dropdown arrow cover */
-    width: 2em;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 0 3px 3px 0;
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 16px 16px 0;
 }
 
 .custom-dropdown select[disabled] {
-    color: rgba(0, 0, 0, .3);
+  color: rgba(0, 0, 0, .3);
 }
 
 .custom-dropdown select[disabled]::after {
-    color: rgba(0, 0, 0, .1);
+  color: rgba(0, 0, 0, .1);
 }
 
 .custom-dropdown::before {
-    background-color: rgba(0, 0, 0, .15);
-}
-
-.custom-dropdown::after {
-    color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, .15);
 }
 
 .generated-key {
-    display: inline-block;
-    border-radius: 5px 0 0 5px;
-    background: #73AD21;
-    padding: 10px;
-    color: white;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 200px;
+  display: inline-block;
+  border-radius: 16px 0 0 16px;
+  background: var(--custom-darker-blue);
+  padding: 0.3em 1em;
+  color: var(--custom-white);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 14em;
 }
 
 .copy {
-    display: inline-block;
-    border-radius: 0 5px 5px 0;
-    background: #5E5DF0;
-    padding: 10px;
-    color: white;
-    user-select: none; /* Standard */
-    cursor: pointer;
+  display: inline-block;
+  border-radius: 0 16px 16px 0;
+  background: var(--custom-dark-blue);
+  padding: 0.3em 1em;
+  color: var(--custom-white);
+  user-select: none; /* Standard */
+  cursor: pointer;
+}
+
+.copy:hover {
+  opacity: 0.9;
+}
+
+#boxesTexts text {
+  font: 30px var(--fonts) !important;
+  fill: var(--custom-white) !important;
+  opacity: 0.9 !important;
+  text-shadow: none !important;
+}
+
+deobfuscator-input-container + deobfuscator-input-container input {
+  margin-top: 1em;
+}
+
+deobfuscator-input-container input {
+  border-radius: 16px !important;
+  border: none;
+  max-width: 20em !important;
+  width: 20em;
+  font-family: inherit;
+  font-size: inherit;
 }
