@@ -1,3 +1,5 @@
+
+const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
 var rectangles = [];
 var zones = []
 var image_width, image_height;
@@ -141,29 +143,56 @@ var load_rect = (event) => {
 };
 
 function addInputZone() {
-        let el = document.createElement('html');
-        el.innerHTML = "<div id='input-zone-"+rectangles.length+"' style ='display: flex; align-items: center'>" +
-                            "<div style='display: inline'>" +
-                                "<span class='custom-dropdown'>"+
-                                    "<select class='fancy-selector'>" +
-                                          "<option value='1'>Affine</option>" +
-                                          "<option value='2'>Encryption</option>" +
-                                          "<option value='3'>Scramble</option>" +
-                                          "<option value='4'>Color</option>" +
-                                          "<option value='5'>Puzzle</option>" +
-                                          "<option value='6'>Blur</option>" +
-                                          "<option value='7'>XOR</option>" +
-                                    "</select>" +
-                                "</span>"+
-                            "</div> " +
-                            "<div class='generated-key'>"+
-                                "Zone "+ rectangles.length +" Key"+
-                            "</div>"+
-                            "<div class='copy' onclick='copy(" + rectangles.length+ ")'>" +
-                                "Copy"+
-                            "</div>"+
-                        "</div>";
-        document.getElementById("input-zones").appendChild(el)
+        const container = document.createElement('obfuscator-input-container');
+        container.setAttribute("id", "input-zone-" + rectangles.length);
+
+        container.appendChild(getObfuscatorInput());
+        container.appendChild(getGeneratedKeyField());
+        container.appendChild(getCopyButton());
+
+        document.getElementById("input-zones").appendChild(container);
+}
+
+function getCopyButton(){
+    const button = document.createElement("div");
+    button.setAttribute("class", "copy");
+    button.addEventListener("click", ()=>{copy(rectangles.length);});
+    button.innerText = "Copy";
+    return button;
+}
+
+
+function getGeneratedKeyField(){
+    const div = document.createElement("div");
+    div.setAttribute("class", "generated-key");
+    div.innerText = "Zone " + rectangles.length + " Key";
+    return div;
+}
+
+function getObfuscatorInput(){
+        const selectWrapper = document.createElement('div');
+
+        const customDropdown = document.createElement("span");
+        customDropdown.setAttribute("class", "custom-dropdown");
+
+        selectWrapper.append(customDropdown);
+        customDropdown.appendChild(getObfuscatorsSelector());
+
+        return selectWrapper;
+}
+
+
+function getObfuscatorsSelector(){
+    const selectElement = document.createElement("select");
+    selectElement.setAttribute("class", "fancy-selector");
+
+    for (let i=0; i<obfuscatorsOptionsList.length; i++){
+        const option = document.createElement("option");
+        option.setAttribute("value", i.toString());
+        option.innerText = obfuscatorsOptionsList[i];
+        selectElement.appendChild(option);
+    }
+    return selectElement;
 }
 
 function addDeobfuscationInputZone(){
