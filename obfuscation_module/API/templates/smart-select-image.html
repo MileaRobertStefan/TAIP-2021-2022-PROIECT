@@ -7,7 +7,7 @@
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('css') }}">
     <script src="{{ url_for('js') }}"></script>
-
+    <script src="{{ url_for('FileSaver') }}"></script>
 </head>
 <body>
 <div class="center-div" style="flex-direction: column;
@@ -47,5 +47,6 @@
 <div class="center-div">
     <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>
 </div>
+<button id="export-keys" class="button-34" style="display: none" onclick="saveStaticDataToFile()"> Export Keys</button>
 </body>
 </html>

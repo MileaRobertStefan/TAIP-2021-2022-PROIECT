@@ -39,6 +39,12 @@ def js():
     resp.headers['Content-type'] = 'text/javascript'
     return resp
 
+@app.route('/FileSaver.js')
+def FileSaver():
+    resp = make_response(render_template("js/FileSaver.js"))
+    resp.headers['Content-type'] = 'text/javascript'
+    return resp
+
 @app.route('/images/<path:path>')
 def send_js(path):
     return send_from_directory('backend/images', path)

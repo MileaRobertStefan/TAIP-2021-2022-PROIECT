@@ -167,12 +167,13 @@ function addInputZone() {
 }
 
 var kk = 0;
-function addDeobfuscationInputZone(){
+
+function addDeobfuscationInputZone(text = '') {
     $('#submit-input-zones').css("display", "inline");
     let el = document.createElement('html');
     el.innerHTML = "<div style ='display: flex; align-items: center'>" +
-                        "<input id='input-zone-"+kk+"' class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;'/>"+
-                    "</div>";
+        "<input id='input-zone-" + kk + "' class='generated-key' style='max-width: 300px; border-radius: 5px 5px 5px 5px;' value='" + text + "'/>" +
+        "</div>";
     kk++;
     document.getElementById("input-zones").appendChild(el)
 }
@@ -201,6 +202,23 @@ function readURL(input) {
     }
 }
 
+function readTextFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            let local_master_key = JSON.parse(e.target.result)
+            Object.keys(local_master_key.zone_keys).forEach((key) => {
+                addDeobfuscationInputZone(local_master_key.zone_keys[key]);
+            })
+        }
+
+        reader.readAsText(input.files[0]);
+    }
+}
+
+var global_master_key
+
 function postToServer(masterKey) {
     var fd = new FormData();
     console.log($('#file'));
@@ -217,6 +235,7 @@ function postToServer(masterKey) {
             contentType: false,
             processData: false,
         }).done((data) => {
+            global_master_key = data
             let i = 0
             data.image_id = JSON.parse(data.image_id)
             Object.keys(data.zone_keys).forEach((key) => {
@@ -228,38 +247,38 @@ function postToServer(masterKey) {
     }
 }
 
-function sendToDeofuscationApi(){
-        var fd = new FormData();
+function sendToDeofuscationApi() {
+    var fd = new FormData();
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const image_id = urlParams.get('image-name').replace(".png", "")
-        fd.append('image_id', image_id);
-        fd.append("zones", getKeysFromInputZones());
-        $.ajax({
-            url: 'deobfuscate',
-            type: 'post',
-            data: fd,
-            contentType: false,
-            processData: false,
-        }).done((data) => {
-             $("#screenshot2")
-                    .attr('src', "data:image/png;base64," + data)
-        });
+    const urlParams = new URLSearchParams(window.location.search);
+    const image_id = urlParams.get('image-name').replace(".png", "")
+    fd.append('image_id', image_id);
+    fd.append("zones", getKeysFromInputZones());
+    $.ajax({
+        url: 'deobfuscate',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+    }).done((data) => {
+        $("#screenshot2")
+            .attr('src', "data:image/png;base64," + data)
+    });
 }
 
 function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
+    return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function getKeysFromInputZones(){
+function getKeysFromInputZones() {
     master_key = {}
-    for(let i = 0; i<kk; i++){
-        let text = document.getElementById("input-zone-"+i).value;
-        if(text !== '')
-            master_key["zone_"+i] = text
+    for (let i = 0; i < kk; i++) {
+        let text = document.getElementById("input-zone-" + i).value;
+        if (text !== '')
+            master_key["zone_" + i] = text
     }
 
-    master_key =  replaceAll(JSON.stringify(master_key),"\\\\\\\\","\\")
+    master_key = replaceAll(JSON.stringify(master_key), "\\\\\\\\", "\\")
     return master_key;
 }
 
@@ -279,7 +298,7 @@ function postToServerForFaceDetection() {
             dataType: "json",
             contentType: false,
             processData: false,
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 if (response.has_faces === true)
                     processDetectedFaces(response.coordinates);
@@ -331,7 +350,7 @@ const appendTextToRectangle = (boxesTexts, rectangle, text) => {
 };
 
 const drawRectangle = (rectangleContainer, rectangleData) => {
-    const { x, y, width, height } = rectangleData;
+    const {x, y, width, height} = rectangleData;
     rectangleContainer.setAttributeNS(null, 'width', width);
     rectangleContainer.setAttributeNS(null, 'height', height);
     rectangleContainer.setAttributeNS(null, 'x', x);
@@ -361,20 +380,21 @@ function faceDetection() {
 function processDetectedFaces(coordinates) {
     console.log("obfuscating faces...");
     for (let coords of coordinates) {
-         console.log("for coordinate...");
+        console.log("for coordinate...");
 //         if (!hitTest(coords.top, coords.right)) {
-            console.log(coords);
-            rectangles.push({
-                x: coords.left / image_width_ratio,
-                y: coords.top / image_height_ratio,
-                width: (coords.right - coords.left) / image_width_ratio,
-                height: (coords.bottom - coords.top) / image_height_ratio
-            });
-            redrawRectangles();
-            addInputZone();
+        console.log(coords);
+        rectangles.push({
+            x: coords.left / image_width_ratio,
+            y: coords.top / image_height_ratio,
+            width: (coords.right - coords.left) / image_width_ratio,
+            height: (coords.bottom - coords.top) / image_height_ratio
+        });
+        redrawRectangles();
+        addInputZone();
 //        }
     }
 }
+
 function copy(i) {
     copyText = $('.generated-key')[i - 1]
     navigator.clipboard.writeText(copyText.innerHTML);
@@ -385,4 +405,12 @@ function showObfuscateLink(img_name) {
         .attr("href", "/deobfuscate-page?image-name=" + img_name.toString() + ".png")
         .css("display", "inline")
         .html("Click here to go to the obfuscated picture")
+     $("#export-keys")
+        .css("display", "inline")
+}
+
+function saveStaticDataToFile() {
+    var blob = new Blob([JSON.stringify(global_master_key)],
+        {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "exportKeys.txt");
 }
