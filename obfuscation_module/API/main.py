@@ -95,4 +95,4 @@ def deobfuscate():
 
 
 print("http://127.0.0.1:5000/obfuscate-page")
-app.run()
+app.run(debug=True)

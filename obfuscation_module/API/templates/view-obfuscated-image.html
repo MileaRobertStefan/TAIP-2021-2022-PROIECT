@@ -20,37 +20,41 @@
     const myParam = urlParams.get('myParam');
   </script>
 
-  <div class="center-div">
-    <div class="button">
-      <label for="file">Import keys</label>
-      <input type='file' id='file' name='file' onchange="readTextFile(this);"/>
+  <header>
+    <h1>Photo Deobfuscator</h1>
+
+    <div class="header__description">
+      <p>Enter or import a set of keys to deobfuscate a picture modified by our algorithm.</p>
     </div>
-  </div>
+  </header>
 
-  <div class="center-div" style="height: 50vh">
-    <img style="height: 500px" id="screenshot" {{ img_name }} draggable="false">
-  </div>
+  <main class="main--has-picture">
+    <input type='file' id='file' name='file' onchange="readTextFile(this);"/>
 
-  <div class="center-div" style="flex-direction: column;
-      align-content: center;
-      align-items: center;">
-      <button onclick="addDeobfuscationInputZone()"
-              style="background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
-              class="button-34">
-          Add key
-      </button>
-      <div id="input-zones"></div>
-      <button id='submit-input-zones' onclick="sendToDeofuscationApi()"
-              style="display: none; background-color: #73AD21; box-shadow: #73AD21 0 10px 20px -10px;"
-              class="button-34">
-          Submit
-      </button>
-  </div>
-  <div class="center-div">
-      <a class="button-34" style="display: none" id="link-to-obfuscate-pic"></a>
-  </div>
-  <div class="center-div">
-      <img style="height: 50vh" id="screenshot2"/>
-  </div>
+    <div class="main__main-content">
+      <div class="picture-controls">
+        <a class="button" href="/obfuscate-page">Go back to obfuscator</a>
+        <label class="button" for="file">Import keys</label>
+      </div>
+
+      <div class="image-container">
+        <img style="height: 500px" id="screenshot" {{ img_name }} draggable="false" />
+        <img style="height: 50vh" id="screenshot2" />
+      </div>
+
+      <div class="main-footer">
+        <div id="input-zones"></div>
+
+        <div class="main-footer__buttons">
+          <button onclick="addDeobfuscationInputZone()" class="button">
+            Add key
+          </button>
+          <button id='submit-input-zones' onclick="sendToDeofuscationApi()" class="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

@@ -158,8 +158,8 @@ main .main__main-content .main-footer {
   justify-content: center;
 }
 
-
-#link-to-obfuscate-pic {
+#link-to-obfuscate-pic,
+#submit-input-zones {
   background: var(--custom-dark-blue);
   font-weight: 600;
 }
@@ -341,4 +341,17 @@ main .main__main-content .main-footer .main-footer__buttons {
   fill: var(--custom-white) !important;
   opacity: 0.9 !important;
   text-shadow: none !important;
+}
+
+deobfuscator-input-container + deobfuscator-input-container input {
+  margin-top: 1em;
+}
+
+deobfuscator-input-container input {
+  border-radius: 16px !important;
+  border: none;
+  max-width: 20em !important;
+  width: 20em;
+  font-family: inherit;
+  font-size: inherit;
 }
