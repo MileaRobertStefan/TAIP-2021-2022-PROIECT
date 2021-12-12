@@ -3,7 +3,7 @@ from API.backend.Comm.command import Command
 from  obfuscation_core.obfuscators.encryption_obfuscator import EncryptionObfuscator
 
 class CommandEncryption(Command):
-    id = 2
+    id = 1
 
     def __init__(self):
         self.key: str = ""

@@ -4,7 +4,7 @@ from obfuscation_core.obfuscators.puzzle_obfuscator import PuzzleObfuscator
 
 
 class CommandPuzzle(Command):
-    id = 5
+    id = 4
 
     def __init__(self):
         self.puzzle_size: int = None
