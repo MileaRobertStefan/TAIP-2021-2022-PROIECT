@@ -9,5 +9,5 @@ class DetectionFacade:
 
     @staticmethod
     def detect(image):
-        faces = face_recognition.face_locations(image, model="cnn")
+        faces = face_recognition.face_locations(image)
         return [FaceCoordinates(face) for face in faces]

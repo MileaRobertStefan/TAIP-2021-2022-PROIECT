@@ -1,0 +1,5 @@
+monitoring.txt
+time.log
+temp/**.jpg
+temp/**.png
+.coverage

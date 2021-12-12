@@ -2,7 +2,6 @@ import face_recognition
 from aop import AspectType
 
 from core.detection_facade import DetectionFacade
-from core.utils import delete_image
 from mop.mop_decorators import requires_file_created_before, requires_file_deleted_after, requires_called_before, \
     requires_calls
 from utils.types import Result
@@ -20,5 +19,4 @@ class FaceDetectionService(metaclass=AspectType):
     def get_faces(path):
         image = face_recognition.load_image_file(path)
         faces = DetectionFacade.detect(image)
-        delete_image(path)
         return Result(len(faces) > 0, faces)
