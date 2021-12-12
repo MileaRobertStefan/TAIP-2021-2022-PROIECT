@@ -22,10 +22,10 @@ def deobfuscate_page():
     image_name = request.args.get('image-name')
 
     if image_name:
-        s = "src=\"/images/" + image_name+ "\""
-        t = render_template('view-obfuscated-image.html', poza=s)
+        s = "src=/images/" + image_name + ""
+        t = render_template('view-obfuscated-image.html', img_name=s)
     else:
-        t = render_template('view-obfuscated-image.html', poza="")
+        t = render_template('view-obfuscated-image.html', img_name="")
 
     return t
 

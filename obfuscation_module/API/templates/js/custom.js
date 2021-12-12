@@ -1,3 +1,4 @@
+let img_id = 0 ;
 const obfuscatorsOptionsList = ["Affine", "Encryption", "Scramble", "Color", "Puzzle", "XOR"];
 let rectangles = [];
 let zones = []
@@ -150,7 +151,6 @@ function getObfuscatorsSelector() {
 }
 
 var kk = 0;
-
 function addDeobfuscationInputZone(text = '') {
     $('#submit-input-zones').css("display", "inline");
     const container = document.createElement('deobfuscator-input-container');
