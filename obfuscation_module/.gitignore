@@ -5,3 +5,4 @@ venv
 .coverage
 **/**/timelog.txt
 timelog.txt
+**/**/images/**.png
