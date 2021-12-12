@@ -192,6 +192,10 @@ main .main__main-content .main-footer .main-footer__buttons {
   z-index: 1;
 }
 
+#screenshot2 {
+  z-index: 3;
+}
+
 #draw {
   position: absolute;
   z-index: 2;
