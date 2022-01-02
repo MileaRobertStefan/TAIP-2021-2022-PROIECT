@@ -26,7 +26,7 @@ function addObfuscationPageEvents() {
 }
 
 function addDeobfuscationPageEvents() {
-    document.getElementById("deobfuscation-input-container").addEventListener('click', addDeobfuscationInputZone);
+    document.getElementById("deobfuscation-input-container").addEventListener('click', ()=>addDeobfuscationInputZone(""));
 
     document.getElementById("submit-input-zones").addEventListener('click', sendToDeofuscationApi);
 

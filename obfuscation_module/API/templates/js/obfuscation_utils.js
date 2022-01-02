@@ -43,17 +43,23 @@ export function submitRect() {
         console.log(coord);
         let zone = {}
         zone['coordinates'] = [[(coord.y * image_height_ratio) | 0, (coord.x * image_width_ratio) | 0], [((coord.y + coord.height) * image_height_ratio) | 0, ((coord.x + coord.width) * image_width_ratio) | 0]];
-        let layers = []
-        const id = document.getElementById("input-zone-" + i).getElementsByTagName("select")[0].value
-        let layer = {'alg_id': id, 'key_data': {'key': "parola123"}}
-
-        layers.push(layer);
-        zone['layers'] = layers;
+        zone['layers'] = getLayers(i);
         masterkey.zones.push(zone);
     }
 
     console.log(masterkey);
     postToServer(JSON.stringify(masterkey));
+}
+
+function getLayers(i) {
+    const options = document.querySelector(`#input-zone-${i} select`).options
+    const layers = []
+    for (let option of options) {
+        if (option.selected) {
+            layers.push({'alg_id': option.value, 'key_data': {'key': "parola123"}})
+        }
+    }
+    return layers
 }
 
 function postToServer(masterKey) {

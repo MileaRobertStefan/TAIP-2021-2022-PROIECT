@@ -9,7 +9,7 @@ export function readTextFile(input) {
             Object.keys(local_master_key.zone_keys).forEach((key) => {
                 addDeobfuscationInputZone(local_master_key.zone_keys[key]);
             })
-            img_id = local_master_key.image_id
+            window.img_id = local_master_key.image_id
             document.getElementById("screenshot").setAttribute("src", "/images/" + local_master_key.image_id + ".png")
         }
 

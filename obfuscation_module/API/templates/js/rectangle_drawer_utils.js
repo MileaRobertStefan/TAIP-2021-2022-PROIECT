@@ -71,8 +71,9 @@ const appendTextToRectangle = (rectangle, text) => {
 
 function getCopyButton(rectangles){
     const button = document.createElement("div");
+    const i = rectangles.length;
     button.setAttribute("class", "copy");
-    button.addEventListener("click", ()=>{copy(rectangles.length);});
+    button.addEventListener("click", ()=>{ copy(i); });
     button.innerText = "Copy";
     return button;
 }
@@ -99,6 +100,7 @@ function getObfuscatorInput(){
 function getObfuscatorsSelector(){
     const selectElement = document.createElement("select");
     selectElement.setAttribute("class", "fancy-selector");
+    selectElement.setAttribute("multiple", "multiple");
 
     for (let i=0; i<obfuscatorsOptionsList.length; i++){
         const option = document.createElement("option");
@@ -111,6 +113,7 @@ function getObfuscatorsSelector(){
 }
 
 function copy(i) {
+    console.log(i);
     const copyText = $('.generated-key')[i - 1]
     navigator.clipboard.writeText(copyText.innerHTML);
 }
