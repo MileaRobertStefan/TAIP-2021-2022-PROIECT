@@ -20,6 +20,7 @@ Example: for photos we can apply N layers above it in a random order with visual
 # Links
 - GoogleDrive: https://drive.google.com/drive/folders/1pRK7F5xQQMvmbnhU2XsmEjvUDeuMip2c?usp=sharing
 - Trello: https://trello.com/b/dy5slVWj/taip-project
+- Technical Report Project: https://www.overleaf.com/read/vqgtjfhtjfny
 
 # Contact
 For more information about this project please don't hesitate to write at duarms@yahoo.com 
