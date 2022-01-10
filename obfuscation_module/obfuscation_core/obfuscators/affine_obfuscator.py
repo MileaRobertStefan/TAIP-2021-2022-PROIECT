@@ -6,9 +6,8 @@ from numpy import ndarray
 
 from key.key_builder import KeyBuilder
 from key.key_types.layer import Layer
-from time_logging.time_logger import monitor_obfuscation
-
 from obfuscation_core.obfuscators.obfuscator import Obfuscator
+from time_logging.time_logger import monitor_obfuscation
 
 
 class AffineObfuscator(Obfuscator):
@@ -26,7 +25,7 @@ class AffineObfuscator(Obfuscator):
         self.b = np.random.randint(0, 256)
         layer = Layer(75, key_data)
         key_builder.set_step(layer)
-        image = self.affine_cipher(image)
+        self.affine_cipher(image)
         print("Affine")
         if self.next_obfuscator is not None:
             self.next_obfuscator.obfuscate(image, key_builder)
@@ -35,13 +34,6 @@ class AffineObfuscator(Obfuscator):
         return (self.a * x + self.b) % self.m
 
     def affine_cipher(self, image):
-        height = image.shape[0]
-        width = image.shape[1]
-        for i in range(0, height):
-            for j in range(0, width):
-                pixel = image[i][j]
-                r = self.get_correspondent(pixel[0])
-                g = self.get_correspondent(pixel[1])
-                b = self.get_correspondent(pixel[2])
-                image[i][j] = [r, g, b]
-        return image
+        affine_image = np.vectorize(self.get_correspondent)(image)
+        for i in range(len(affine_image)):
+            image[i] = affine_image[i]

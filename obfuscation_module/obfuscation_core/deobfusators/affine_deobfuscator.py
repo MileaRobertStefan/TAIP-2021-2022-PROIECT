@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 from numpy import ndarray
 
@@ -16,7 +15,7 @@ class AffineDeObfuscator(DeObfuscator):
         print("Affine")
         np.random.seed(self.key_data)
         self.b = np.random.randint(0, 256)
-        image = self.decryption(image)
+        self.decryption(image)
         if self.next_deobfuscator is not None:
             self.next_deobfuscator.deobfuscate(image)
 
@@ -24,14 +23,6 @@ class AffineDeObfuscator(DeObfuscator):
         return (self.a_inverse * (y - self.b)) % self.m
 
     def decryption(self, image):
-        height = image.shape[0]
-        width = image.shape[1]
-
-        for i in range(0, height):
-            for j in range(0, width):
-                a = image[i][j]  # rgb list
-                r = self.get_correspondent(a[0])
-                g = self.get_correspondent(a[1])
-                b = self.get_correspondent(a[2])
-                image[i][j] = [r, g, b]
-        return image
+        affine_image = np.vectorize(self.get_correspondent)(image)
+        for i in range(len(affine_image)):
+            image[i] = affine_image[i]
